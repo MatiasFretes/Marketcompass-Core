@@ -29,7 +29,7 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
     - name: Give execute permission to gradlew
-      run: chmod +x pp2-multimarket/gradlew
+      run: chmod +x /gradlew
         
     - name: Build with Gradle
-      run: ./pp2-multimarket/gradlew build
+      run: ./gradlew build
