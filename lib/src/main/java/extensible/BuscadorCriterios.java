@@ -43,7 +43,7 @@ public class BuscadorCriterios {
 
 //    public static void main(String[] args) {
 //    	BuscadorCriterios discovery = new BuscadorCriterios();
-//        Set<FiltradorPorCriterio> classes = discovery.buscar(".../lib.jar");
+//        Set<FiltradorPorCriterio> classes = discovery.buscar("C:/Users/Matias/Proyectos/DistanciaProject/DistanciaProject/lib/build/libs/lib.jar");
 //
 //        for (FiltradorPorCriterio obj : classes) {
 //        	FiltradorPorCriterio criterio = (FiltradorPorCriterio) obj;
