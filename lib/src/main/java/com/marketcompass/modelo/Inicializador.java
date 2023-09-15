@@ -17,13 +17,15 @@ public class Inicializador {
 	public static FiltradorPorCriterio CRITERIO;
 	
 	public void inicializar(String rutaJsonMercados, String rutaCriterioJAR) throws Exception {
-        ObjectMapper mapper = new ObjectMapper();
-        Map<String, List<String>> mercadosDelJson = mapper.readValue(new File(rutaJsonMercados), new TypeReference<Map<String, List<String>>>(){});
-		MERCADOS = mercadosDelJson;
-		
-		BuscadorCriterios buscadorCriterios = new BuscadorCriterios();
-        Set<FiltradorPorCriterio> filtradores = buscadorCriterios.buscar(rutaCriterioJAR);
-        CRITERIO = filtradores.stream().findFirst().get();
+		ObjectMapper mapper = new ObjectMapper();   
+	    BuscadorCriterios buscadorCriterios = new BuscadorCriterios();   
+	    MERCADOS = mapper.readValue(new File(rutaJsonMercados), new TypeReference<>() {});   
+	    try {
+	      Set<FiltradorPorCriterio> filtradores = buscadorCriterios.buscar(rutaCriterioJAR);      
+	      CRITERIO = filtradores.stream().findFirst().get();   
+	      }catch (Exception e){
+	      CRITERIO = null;   
+	    }
 	}
 
 }

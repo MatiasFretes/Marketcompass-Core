@@ -21,6 +21,8 @@ public class US1 {
 	private String ubicacionJsonConDosMercados = "src/test/resources/escenarioCon2Mercados.json";
 	private String ubicacionUnicaImplementacion = "src/test/resources/Distancia.jar";
 	private String ubicacionMultiplesImplementaciones = "src/test/resources/MultiplesDistancias.jar"; 
+	private String ubicacionSinCriterios = "src/test/resources/SoloMain.jar";
+	private String ubicacionSinMercados = "src/test/resources/archivo.txt";
 	
 	@Before public void setup() throws Exception {
 		inicializador = new Inicializador();
@@ -61,6 +63,20 @@ public class US1 {
 		assertTrue(Inicializador.CRITERIO.getClass().getSimpleName().equals("DistanciaCercana"));
 		Pair<String, List<String>> mercadoRecomendado = recomendador.recomendar(Arrays.asList("P2"));
 		validarMercadoRecomendado(mercadoRecomendado, "M1", Arrays.asList("P2"));
+	}
+	
+	@Test
+	public void CA6() throws Exception {
+	   inicializador = new Inicializador();   
+	   inicializador.inicializar(ubicacionJsonConUnMercado, ubicacionSinCriterios);   
+	   Pair<String, List<String>> mercadoRecomendado = recomendador.recomendar(List.of("P2"));  
+		validarMercadoRecomendado(mercadoRecomendado, "M1", Arrays.asList("P2"));
+	}
+
+	@Test(expected = Exception.class)
+	public void CA7() throws Exception {
+	   inicializador = new Inicializador();   
+	   inicializador.inicializar(ubicacionSinMercados, ubicacionUnicaImplementacion);
 	}
 
 	private void validarMercadoRecomendado(Pair<String, List<String>> mercadoRecomendado, String mercadoEsperado, List<String> productosEsperados) {
