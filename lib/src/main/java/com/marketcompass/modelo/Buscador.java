@@ -15,7 +15,7 @@ public class Buscador {
     public Buscador() {
     }
 
-    Pair<String, List<String>> buscar(List<String> productos){
+    public Pair<String, List<String>> buscar(List<String> productos){
         Map<String, List<String>> mercados = new HashMap<>();
         ObjectMapper mapper = new ObjectMapper();
         String ruta = "C:\\Users\\Usuario\\IdeaProjects\\MultiMarket-PP2-Core\\lib\\mercados\\mercados.json";

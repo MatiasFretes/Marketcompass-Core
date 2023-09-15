@@ -2,7 +2,6 @@ package com.marketcompass.modelo;
 
 import org.apache.commons.math3.util.Pair;
 import java.util.List;
-import java.util.Map;
 
 public class Recomendador {
 
@@ -12,7 +11,7 @@ public class Recomendador {
         this.buscador = new Buscador();
     }
 
-    Pair<String, List<String>> recomendar(List<String> productos){
+    public Pair<String, List<String>> recomendar(List<String> productos){
         return buscador.buscar(productos);
     }
     

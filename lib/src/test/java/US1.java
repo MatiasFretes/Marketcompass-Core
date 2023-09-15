@@ -10,7 +10,7 @@ public class US1 {
    
 	Recomendador recomendador;
 	@Before public void setup() {
-		recomendador = new Recomendador(null);
+		recomendador = new Recomendador();
 	}
 	
 	@Test (expected = IllegalArgumentException.class)
