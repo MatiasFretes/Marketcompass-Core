@@ -36,31 +36,37 @@ public class US1 {
 
 	@Test
 	public void CA2() throws Exception {
-		List<String> productos = new ArrayList<String>();
-		productos.add("??");
+		List<String> productos = Arrays.asList("??");
 		assertNull(recomendador.recomendar(productos));
 	}
 	
 	@Test
 	public void CA3() throws Exception {
-		List<String> productosEsperados = new ArrayList<String>();
-		productosEsperados.add("P1");
-		productosEsperados.add("P2");
-		Pair<String, List<String>> mercadoRecomendado = recomendador.recomendar(productosEsperados);
-		assertNotNull(mercadoRecomendado);
-		assertTrue(mercadoRecomendado.getKey().equals("M1"));
-		assertTrue(mercadoRecomendado.getValue().size() == 2);
-		assertTrue(mercadoRecomendado.getValue().equals(productosEsperados));
+		Pair<String, List<String>> mercadoRecomendado = recomendador.recomendar(Arrays.asList("P1", "P2"));
+		validarMercadoRecomendado(mercadoRecomendado, "M1", Arrays.asList("P1", "P2"));
 	}
 	
 	@Test
 	public void CA4() throws Exception {
 		inicializador = new Inicializador();
-		inicializador.inicializar(ubicacionJsonConDosMercados, ubicacionMultiplesImplementaciones);
+		inicializador.inicializar(ubicacionJsonConDosMercados, ubicacionUnicaImplementacion);
 		Pair<String, List<String>> mercadoRecomendado = recomendador.recomendar(Arrays.asList("P2"));
+		validarMercadoRecomendado(mercadoRecomendado,"M1", Arrays.asList("P2"));
+	}
+	
+	@Test
+	public void CA5() throws Exception {
+		inicializador = new Inicializador();
+		inicializador.inicializar(ubicacionJsonConDosMercados, ubicacionMultiplesImplementaciones);
+		assertTrue(Inicializador.CRITERIO.getClass().getSimpleName().equals("DistanciaCercana"));
+		Pair<String, List<String>> mercadoRecomendado = recomendador.recomendar(Arrays.asList("P2"));
+		validarMercadoRecomendado(mercadoRecomendado, "M1", Arrays.asList("P2"));
+	}
+
+	private void validarMercadoRecomendado(Pair<String, List<String>> mercadoRecomendado, String mercadoEsperado, List<String> productosEsperados) {
 		assertNotNull(mercadoRecomendado);
-		assertTrue(mercadoRecomendado.getKey().equals("M1"));
-		assertTrue(mercadoRecomendado.getValue().size() == 1);
-		assertTrue(mercadoRecomendado.getValue().equals(Arrays.asList("P2")));
+		assertTrue(mercadoRecomendado.getKey().equals(mercadoEsperado));
+		assertTrue(mercadoRecomendado.getValue().size() == productosEsperados.size());
+		assertTrue(mercadoRecomendado.getValue().equals(productosEsperados));
 	}
 }
