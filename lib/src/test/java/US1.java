@@ -15,16 +15,16 @@ import com.marketcompass.modelo.Recomendador;
 
 public class US1 {
    
-	Recomendador recomendador;
-	Inicializador inicializador;
-	String rutaJsonConUnMercado = "src/test/resources/escenarioMercados.json";
-	String rutaJsonConDosMercado = "src/test/resources/escenarioCon2Mercados.json";
-	String rutaAlCriterioJAR = "src/test/resources/FiltroDevolverPrimero.jar";
-	
+	private Recomendador recomendador;
+	private Inicializador inicializador;
+	private String ubicacionJsonConUnMercado = "src/test/resources/escenarioMercados.json";
+	private String ubicacionJsonConDosMercados = "src/test/resources/escenarioCon2Mercados.json";
+	private String ubicacionUnicaImplementacion = "src/test/resources/Distancia.jar";
+	private String ubicacionMultiplesImplementaciones = "src/test/resources/MultiplesDistancias.jar"; 
 	
 	@Before public void setup() throws Exception {
 		inicializador = new Inicializador();
-		inicializador.inicializar(rutaJsonConUnMercado, rutaAlCriterioJAR);
+		inicializador.inicializar(ubicacionJsonConUnMercado, ubicacionUnicaImplementacion);
 		recomendador = new Recomendador();	
 	}
 	
@@ -56,7 +56,7 @@ public class US1 {
 	@Test
 	public void CA4() throws Exception {
 		inicializador = new Inicializador();
-		inicializador.inicializar(rutaJsonConDosMercado, rutaAlCriterioJAR);
+		inicializador.inicializar(ubicacionJsonConDosMercados, ubicacionMultiplesImplementaciones);
 		Pair<String, List<String>> mercadoRecomendado = recomendador.recomendar(Arrays.asList("P2"));
 		assertNotNull(mercadoRecomendado);
 		assertTrue(mercadoRecomendado.getKey().equals("M1"));
