@@ -1,7 +1,6 @@
 import static org.junit.Assert.assertTrue;
 
 import java.util.Set;
-
 import org.junit.Before;
 import org.junit.Test;
 import extensible.BuscadorCriterios;
@@ -22,14 +21,20 @@ public class US2 {
         buscadorCriterios.buscar(ubicacionInexistente);
     }
     
-    @Test(expected = RuntimeException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void CA2() throws Exception{
+    	String ubicacionInvalida = "src/test/resources/archivo.txt";
+    	buscadorCriterios.buscar(ubicacionInvalida);
+    }
+       
+    @Test(expected = RuntimeException.class)
+    public void CA3() throws Exception{
     	String ubicacionExistenteSinCriterio = "src/test/resources/SoloMain.jar";
     	buscadorCriterios.buscar(ubicacionExistenteSinCriterio);
     }
     
     @Test
-    public void CA3() throws Exception {
+    public void CA4() throws Exception {
     	String ubicacionExistente = "src/test/resources/Distancia.jar";
     	Set<FiltradorPorCriterio> filtradores = buscadorCriterios.buscar(ubicacionExistente);
     	assertTrue(!filtradores.isEmpty());
@@ -38,7 +43,7 @@ public class US2 {
     }
     
     @Test
-    public void CA4() throws Exception{
+    public void CA5() throws Exception{
 		String ubicacionExistente = "src/test/resources/MultiplesDistancias.jar";
 		Set<FiltradorPorCriterio> filtradores = buscadorCriterios.buscar(ubicacionExistente);
 		assertTrue(!filtradores.isEmpty());
