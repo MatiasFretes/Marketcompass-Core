@@ -1,11 +1,13 @@
 package modelo;
 
-import configuracion.Configuracion;
+import configuracion.ConfiguracionRutas;
 
 public class Inicializador {
+	
 	public Recomendacion inicializar() throws Exception {
-		String rutaJsonMercados = Configuracion.getRutaJsonMercados();
+		String rutaJsonMercados = ConfiguracionRutas.getRutaJsonMercados();
 		ProveedorMercados.iniciarMercados(rutaJsonMercados);
 		return new Recomendacion();
 	}
+	
 }

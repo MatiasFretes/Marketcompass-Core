@@ -3,15 +3,13 @@ package modelo;
 public class Recomendacion {
 	
 	private Mercado mercado;
-	private String mensaje;
 	
 	public Recomendacion() {
 		
 	}
 	
-	public Recomendacion(Mercado mercado, String mensaje) {
+	public Recomendacion(Mercado mercado) {
 		this.mercado = mercado;
-		this.mensaje = mensaje;
 	}
 
 	public Mercado getMercado() {
@@ -22,16 +20,8 @@ public class Recomendacion {
 		this.mercado = mercado;
 	}
 
-	public String getMensaje() {
-		return mensaje;
-	}
-
-	public void setMensaje(String mensaje) {
-		this.mensaje = mensaje;
-	}
-
 	@Override
 	public String toString() {
-		return "Recomendacion [mercado=" + mercado + ", mensaje=" + mensaje + "]";
+		return "Recomendacion [mercado=" + mercado + "]";
 	}
 }

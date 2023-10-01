@@ -9,9 +9,9 @@ public class Main {
 
 	public static void main(String[] args) throws Exception {
 		Inicializador inicializador = new Inicializador();
-		Recomendacion recomendador = inicializador.inicializar();
+		Recomendacion recomendacion = inicializador.inicializar();
 		Core core = new Core();
-		core.recomendar(Arrays.asList("Arroz"), recomendador);
+		Recomendacion recomendacionDelCore = core.recomendar(Arrays.asList("Arroz"));
 	}
 
 }

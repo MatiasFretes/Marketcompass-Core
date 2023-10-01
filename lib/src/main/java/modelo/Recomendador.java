@@ -9,12 +9,11 @@ public class Recomendador {
         this.buscador = new BuscadorMercados();
     }
 
-    public void recomendar(List<String> productos, Recomendacion recomendacion) throws Exception{
-    	if(productos == null || productos.isEmpty())
+    public Mercado recomendar(List<String> productos) throws Exception{  	
+    	if(productos == null)
             throw new IllegalArgumentException();
 
-    	Mercado mercado = buscador.buscar(productos);    	
-    	recomendacion.setMercado(mercado);
+    	return buscador.buscar(productos);    	
     }
    
 }
