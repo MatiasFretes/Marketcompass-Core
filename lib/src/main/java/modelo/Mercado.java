@@ -1,4 +1,4 @@
-package com.marketcompass.modelo;
+package modelo;
 
 import java.util.List;
 
@@ -7,6 +7,10 @@ public class Mercado {
 	private String nombre;
 	private List<String> productos;
 
+	public Mercado() {
+		
+	}
+	
 	public Mercado(String nombre, List<String> productos) {
 		this.nombre = nombre;
 		this.productos = productos;

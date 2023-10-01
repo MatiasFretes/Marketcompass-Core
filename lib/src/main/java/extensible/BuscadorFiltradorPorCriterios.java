@@ -9,7 +9,9 @@ import java.util.HashSet;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-public class BuscadorCriterios {
+import modelo.Criterio;
+
+public class BuscadorFiltradorPorCriterios {
 	
     @SuppressWarnings("resource")
 	public Set<FiltradorPorCriterio> buscar(String ubicacion) throws Exception {
@@ -17,7 +19,7 @@ public class BuscadorCriterios {
         File archivo = new File(ubicacion);
         
         if (!archivo.exists() || !archivo.isFile() || !ubicacion.endsWith(".jar")) 
-            throw new IllegalArgumentException("El archivo no es un archivo JAR válido: " + ubicacion);
+            throw new IllegalArgumentException("El archivo no es un archivo JAR valido: " + ubicacion);
        
         URL url = archivo.toURI().toURL();
         URLClassLoader classLoader = new URLClassLoader(new URL[]{url});
@@ -37,6 +39,12 @@ public class BuscadorCriterios {
         }
         classLoader.close();
         
+        guardarCriterio(implementacionesCriterios.stream().findFirst().get());
+        
         return implementacionesCriterios;
     }
+
+	private void guardarCriterio(FiltradorPorCriterio filtradorPorCriterio) throws Exception {
+		Criterio.CRITERIO= filtradorPorCriterio;
+	}
 }

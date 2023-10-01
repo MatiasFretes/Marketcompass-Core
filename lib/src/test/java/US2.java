@@ -3,12 +3,12 @@ import static org.junit.Assert.assertTrue;
 import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
-import extensible.BuscadorCriterios;
+import extensible.BuscadorFiltradorPorCriterios;
 import extensible.FiltradorPorCriterio;
 
 public class US2 {
 	
-	private BuscadorCriterios buscadorCriterios;
+	private BuscadorFiltradorPorCriterios buscadorCriterios;
 	private String ubicacionExistenteSinCriterio = "src/test/resources/SoloMain.jar";
 	private String ubicacionInvalida = "src/test/resources/archivo.txt";
 	private String ubicacionUnicaImplementacion = "src/test/resources/Distancia.jar";
@@ -16,7 +16,7 @@ public class US2 {
 	
     @Before
     public void setUp() {
-    	buscadorCriterios = new BuscadorCriterios();
+    	buscadorCriterios = new BuscadorFiltradorPorCriterios();
     }
 
     @Test(expected = IllegalArgumentException.class)

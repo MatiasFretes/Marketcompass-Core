@@ -1,7 +1,8 @@
 package extensible;
 
-import com.marketcompass.modelo.Mercado;
 import java.util.List;
+
+import modelo.Mercado;
 
 public interface FiltradorPorCriterio {
 
