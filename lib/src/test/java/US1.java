@@ -1,5 +1,5 @@
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,78 +12,63 @@ public class US1 {
    
 	private Core core;
 	private Inicializador inicializador;
-//	private String ubicacionJsonConUnMercado = "src/test/resources/escenarioMercados.json";
-//	private String ubicacionJsonConDosMercados = "src/test/resources/escenarioCon2Mercados.json";
-//	private String ubicacionUnicaImplementacion = "src/test/resources/Distancia.jar";
-//	private String ubicacionMultiplesImplementaciones = "src/test/resources/MultiplesDistancias.jar"; 
-//	private String ubicacionSinCriterios = "src/test/resources/SoloMain.jar";
-//	private String ubicacionSinMercados = "src/test/resources/archivo.txt";
-	
-	private List<String> productosInexistentes = Arrays.asList("");
+	private String rutaJsonMercados = "src/test/resources/mercados.json";
+	private String rutaJarCriterio = "src/test/resources/Distancia.jar";
+	private List<String> productoInexistente = Arrays.asList("");
+	private List<String> productoExistente = Arrays.asList("P1");
+	private List<String> productoRepetido = Arrays.asList("P3");
+	private List<String> productoNulo = null;
+	private String mercadoEsperado = "M1";
 	
 	@BeforeEach 
 	public void setup() throws Exception {
 		inicializador = new Inicializador();
-		inicializador.inicializar();
+		inicializador.iniciarMercados(rutaJsonMercados);
 		core = new Core();	
 	}
 	
 	@Test
-	public void CA1_MercadoInexistente() throws Exception {
-		Recomendacion recomendacion = core.recomendar(productosInexistentes);
-		assertNull(recomendacion.getMercado());
+	public void CA1_MercadoInexistente() throws Exception {	
+		core.buscarCriterios(rutaJarCriterio);
+		Recomendacion recomendacion = core.recomendar(productoInexistente);
+		assertTrue(recomendacion.isEmpty());
 	}
 
 	@Test
 	public void CA2_ListaProductosInvalidos() throws Exception {
 		assertThrows(IllegalArgumentException.class, () -> {
-			core.recomendar(null);
+			core.recomendar(productoNulo);
         });
 	}
 
-	/*
 	@Test
-	public void CA3() throws Exception {
-		Pair<String, List<String>> mercadoRecomendado = recomendador.recomendar(Arrays.asList("P1", "P2"));
-		validarMercadoRecomendado(mercadoRecomendado, "M1", Arrays.asList("P1", "P2"));
+	public void CA3_MercadoRecomendado() throws Exception {
+		core.buscarCriterios(rutaJarCriterio);
+	    Recomendacion recomendacion = core.recomendar(productoExistente);    
+	    assertTrue(recomendacion.getMercado().getNombre().equals(mercadoEsperado));
 	}
 	
 	@Test
-	public void CA4() throws Exception {
-		inicializador = new Inicializador();
-		inicializador.inicializar(ubicacionJsonConDosMercados, ubicacionUnicaImplementacion);
-		Pair<String, List<String>> mercadoRecomendado = recomendador.recomendar(Arrays.asList("P2"));
-		validarMercadoRecomendado(mercadoRecomendado,"M1", Arrays.asList("P2"));
+	public void CA4_MultiplesMercados() throws Exception {
+		core.buscarCriterios(rutaJarCriterio);
+		Recomendacion recomendacion = core.recomendar(productoRepetido);
+		assertTrue(recomendacion.getMercado().getNombre().equals(mercadoEsperado));
 	}
 	
+/* EN DUDA
 	@Test
-	public void CA5() throws Exception {
+	public void CA5_MultiplesCriterios() throws Exception {
 		inicializador = new Inicializador();
 		inicializador.inicializar(ubicacionJsonConDosMercados, ubicacionMultiplesImplementaciones);
 		assertTrue(Inicializador.CRITERIO.getClass().getSimpleName().equals("DistanciaCercana"));
 		Pair<String, List<String>> mercadoRecomendado = recomendador.recomendar(Arrays.asList("P2"));
 		validarMercadoRecomendado(mercadoRecomendado, "M1", Arrays.asList("P2"));
 	}
-	
-	@Test
+		
+	@Test(expected = Exception.class)
 	public void CA6() throws Exception {
 	   inicializador = new Inicializador();   
-	   inicializador.inicializar(ubicacionJsonConUnMercado, ubicacionSinCriterios);   
-	   Pair<String, List<String>> mercadoRecomendado = recomendador.recomendar(List.of("P2"));  
-		validarMercadoRecomendado(mercadoRecomendado, "M1", Arrays.asList("P2"));
-	}
-
-	@Test(expected = Exception.class)
-	public void CA7() throws Exception {
-	   inicializador = new Inicializador();   
 	   inicializador.inicializar(ubicacionSinMercados, ubicacionUnicaImplementacion);
-	}
-
-	private void validarMercadoRecomendado(Pair<String, List<String>> mercadoRecomendado, String mercadoEsperado, List<String> productosEsperados) {
-		assertNotNull(mercadoRecomendado);
-		assertTrue(mercadoRecomendado.getKey().equals(mercadoEsperado));
-		assertTrue(mercadoRecomendado.getValue().size() == productosEsperados.size());
-		assertTrue(mercadoRecomendado.getValue().equals(productosEsperados));
 	}
 	*/
 }

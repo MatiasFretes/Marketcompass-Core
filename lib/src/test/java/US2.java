@@ -1,21 +1,20 @@
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import extensible.BuscadorFiltradorPorCriterios;
 import extensible.FiltradorPorCriterio;
 
 public class US2 {
 	
 	private BuscadorFiltradorPorCriterios buscadorCriterios;
+	
 	private String ubicacionInexistente = "";
-	private String ubicacionExistenteSinCriterio = "src/test/resources/SoloMain.jar";
+	private String ubicacionExistenteSinCriterio = "src/test/resources/DistanciaInvalido.jar";
 	private String ubicacionInvalida = "src/test/resources/archivo.txt";
 	private String ubicacionUnicaImplementacion = "src/test/resources/Distancia.jar";
-	private String ubicacionMultiplesImplementaciones = "src/test/resources/MultiplesDistancias.jar"; 
+	private String ubicacionMultiplesImplementaciones = "src/test/resources/DistanciasMultiples.jar"; 
 	
 	@BeforeEach
     public void setUp() {

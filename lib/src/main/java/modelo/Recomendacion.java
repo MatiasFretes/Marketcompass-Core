@@ -19,6 +19,10 @@ public class Recomendacion {
 	public void setMercado(Mercado mercado) {
 		this.mercado = mercado;
 	}
+	
+	public boolean isEmpty() {
+		return this.mercado == null || this.mercado.getNombre().isEmpty() || this.mercado.getProductos().isEmpty();
+	}
 
 	@Override
 	public String toString() {

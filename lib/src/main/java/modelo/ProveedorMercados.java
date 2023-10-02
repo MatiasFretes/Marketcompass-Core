@@ -10,7 +10,7 @@ public class ProveedorMercados {
 	
 	public static List<Mercado> MERCADOS;
 	
-	public static void iniciarMercados(String path) throws Exception{
+	public static void obtenerMercados(String path) throws Exception{
 		ObjectMapper mapper = new ObjectMapper(); 
 	    MERCADOS = mapper.readValue(new File(path), new TypeReference<List<Mercado>>() {});
 	}

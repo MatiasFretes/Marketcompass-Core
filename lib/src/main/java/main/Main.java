@@ -11,7 +11,9 @@ public class Main {
 		Inicializador inicializador = new Inicializador();
 		Recomendacion recomendacion = inicializador.inicializar();
 		Core core = new Core();
-		Recomendacion recomendacionDelCore = core.recomendar(Arrays.asList("Arroz"));
+		Recomendacion recomendacionDelCore = core.obtenerRecomendacion(Arrays.asList("Arroz"));
+		
+		System.out.println(recomendacionDelCore);
 	}
 
 }
