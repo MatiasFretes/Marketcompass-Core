@@ -9,8 +9,6 @@ import java.util.HashSet;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import modelo.Criterio;
-
 public class BuscadorFiltradorPorCriterios {
 	
     @SuppressWarnings("resource")
@@ -38,13 +36,7 @@ public class BuscadorFiltradorPorCriterios {
             implementacionesCriterios.add(criterioEncontrado);
         }
         classLoader.close();
-        
-        guardarCriterio(implementacionesCriterios.stream().findFirst().get());
-        
+                
         return implementacionesCriterios;
     }
-
-	private void guardarCriterio(FiltradorPorCriterio filtradorPorCriterio) throws Exception {
-		Criterio.CRITERIO= filtradorPorCriterio;
-	}
 }

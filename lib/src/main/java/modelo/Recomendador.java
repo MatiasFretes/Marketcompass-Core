@@ -9,7 +9,9 @@ public class Recomendador {
         this.buscador = new BuscadorMercados();
     }
 
-    public Mercado recomendar(List<String> productos) throws Exception{  	
+    public Mercado recomendar() throws Exception{  	
+    	List<String> productos = PeticionUsuario.getProductos();
+    	
     	if(productos == null)
             throw new IllegalArgumentException();
 

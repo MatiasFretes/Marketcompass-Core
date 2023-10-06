@@ -1,6 +1,8 @@
 package modelo;
 
-public class Recomendacion {
+import java.util.Observable;
+
+public class Recomendacion extends Observable{
 	
 	private Mercado mercado;
 	
@@ -18,6 +20,8 @@ public class Recomendacion {
 
 	public void setMercado(Mercado mercado) {
 		this.mercado = mercado;
+		setChanged();
+        notifyObservers(this.mercado);
 	}
 	
 	public boolean isEmpty() {

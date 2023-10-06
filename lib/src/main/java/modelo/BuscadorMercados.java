@@ -13,7 +13,7 @@ public class BuscadorMercados {
     }
 
 	private List<Mercado> obtenerMercadosConMayoriaDeProductos(List<String> productos) throws Exception {
-		List<Mercado> todosMercados = ProveedorMercados.MERCADOS;
+		List<Mercado> todosMercados = ProveedorMercados.getMercados();
 		List<Mercado> mercadosConTodosLosProductos = new ArrayList<>();
 		List<Mercado> mercadosConAlMenosUnProducto = new ArrayList<>();
 		

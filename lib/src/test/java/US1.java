@@ -5,13 +5,11 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import modelo.Core;
-import modelo.Inicializador;
 import modelo.Recomendacion;
 
 public class US1 {
    
 	private Core core;
-	private Inicializador inicializador;
 	private String rutaJsonMercados = "src/test/resources/mercados.json";
 	private String rutaJarCriterio = "src/test/resources/Distancia.jar";
 	private List<String> productoInexistente = Arrays.asList("");
@@ -22,36 +20,36 @@ public class US1 {
 	
 	@BeforeEach 
 	public void setup() throws Exception {
-		inicializador = new Inicializador();
-		inicializador.iniciarMercados(rutaJsonMercados);
-		core = new Core();	
+		Core.RUTA_JSON_MERCADOS = rutaJsonMercados;
+		Core.RUTA_JAR_CRITERIO = rutaJarCriterio;
 	}
 	
 	@Test
 	public void CA1_MercadoInexistente() throws Exception {	
-		core.buscarCriterios(rutaJarCriterio);
-		Recomendacion recomendacion = core.recomendar(productoInexistente);
+		core = new Core(productoInexistente);
+		Recomendacion recomendacion = core.recomendar();
 		assertTrue(recomendacion.isEmpty());
 	}
 
 	@Test
 	public void CA2_ListaProductosInvalidos() throws Exception {
 		assertThrows(IllegalArgumentException.class, () -> {
-			core.recomendar(productoNulo);
+			core = new Core(productoNulo);
+			core.recomendar();
         });
 	}
 
 	@Test
 	public void CA3_MercadoRecomendado() throws Exception {
-		core.buscarCriterios(rutaJarCriterio);
-	    Recomendacion recomendacion = core.recomendar(productoExistente);    
+		core = new Core(productoExistente);
+	    Recomendacion recomendacion = core.recomendar();    
 	    assertTrue(recomendacion.getMercado().getNombre().equals(mercadoEsperado));
 	}
 	
 	@Test
 	public void CA4_MultiplesMercados() throws Exception {
-		core.buscarCriterios(rutaJarCriterio);
-		Recomendacion recomendacion = core.recomendar(productoRepetido);
+		core = new Core(productoRepetido);
+	    Recomendacion recomendacion = core.recomendar();
 		assertTrue(recomendacion.getMercado().getNombre().equals(mercadoEsperado));
 	}
 	
