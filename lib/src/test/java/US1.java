@@ -4,11 +4,16 @@ import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import modelo.BuscadorMercados;
 import modelo.Core;
+import modelo.CoreInit;
+import modelo.Mercado;
 import modelo.Recomendacion;
 
 public class US1 {
    
+	private CoreInit coreInit;
 	private Core core;
 	private String rutaJsonMercados = "src/test/resources/mercados.json";
 	private String rutaJarCriterio = "src/test/resources/Distancia.jar";
@@ -20,53 +25,37 @@ public class US1 {
 	
 	@BeforeEach 
 	public void setup() throws Exception {
-		Core.RUTA_JSON_MERCADOS = rutaJsonMercados;
-		Core.RUTA_JAR_CRITERIO = rutaJarCriterio;
+		CoreInit.RUTA_JSON_MERCADOS = rutaJsonMercados;
+		CoreInit.RUTA_JAR_CRITERIO = rutaJarCriterio;
+		coreInit = new CoreInit();
+		core = coreInit.inicializar();		
 	}
 	
 	@Test
-	public void CA1_MercadoInexistente() throws Exception {	
-		core = new Core(productoInexistente);
-		Recomendacion recomendacion = core.recomendar();
+	public void CA1_MercadoInexistente() throws Exception {
+		Recomendacion recomendacion = core.obtenerRecomendacion(productoInexistente);
 		assertTrue(recomendacion.isEmpty());
 	}
 
 	@Test
 	public void CA2_ListaProductosInvalidos() throws Exception {
 		assertThrows(IllegalArgumentException.class, () -> {
-			core = new Core(productoNulo);
-			core.recomendar();
+			core.obtenerRecomendacion(productoNulo);
         });
 	}
 
 	@Test
 	public void CA3_MercadoRecomendado() throws Exception {
-		core = new Core(productoExistente);
-	    Recomendacion recomendacion = core.recomendar();    
+		Recomendacion recomendacion = core.obtenerRecomendacion(productoExistente);
 	    assertTrue(recomendacion.getMercado().getNombre().equals(mercadoEsperado));
 	}
 	
 	@Test
 	public void CA4_MultiplesMercados() throws Exception {
-		core = new Core(productoRepetido);
-	    Recomendacion recomendacion = core.recomendar();
+		BuscadorMercados buscadorMercados = new BuscadorMercados();
+		List<Mercado> mercadosConProductos = buscadorMercados.buscar(productoRepetido, core.recomendador.mercados);
+		assertTrue(mercadosConProductos.size() >= 2);
+	    Recomendacion recomendacion = core.obtenerRecomendacion(productoRepetido);
 		assertTrue(recomendacion.getMercado().getNombre().equals(mercadoEsperado));
 	}
-	
-/* EN DUDA
-	@Test
-	public void CA5_MultiplesCriterios() throws Exception {
-		inicializador = new Inicializador();
-		inicializador.inicializar(ubicacionJsonConDosMercados, ubicacionMultiplesImplementaciones);
-		assertTrue(Inicializador.CRITERIO.getClass().getSimpleName().equals("DistanciaCercana"));
-		Pair<String, List<String>> mercadoRecomendado = recomendador.recomendar(Arrays.asList("P2"));
-		validarMercadoRecomendado(mercadoRecomendado, "M1", Arrays.asList("P2"));
-	}
-		
-	@Test(expected = Exception.class)
-	public void CA6() throws Exception {
-	   inicializador = new Inicializador();   
-	   inicializador.inicializar(ubicacionSinMercados, ubicacionUnicaImplementacion);
-	}
-	*/
 }
