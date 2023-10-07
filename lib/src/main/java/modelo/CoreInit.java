@@ -11,14 +11,18 @@ public class CoreInit {
 	public static String RUTA_JSON_MERCADOS = ConfiguracionRutas.getRutaJsonMercados();
 	public static String RUTA_JAR_CRITERIO = ConfiguracionRutas.getRutaExtensionJAR();
 	
-	public Core inicializar() throws Exception {	
-		//Iniciar mercados
-		List<Mercado> mercados = MercadosJsonParser.obtenerMercados(RUTA_JSON_MERCADOS);
-		
-		//Iniciar criterio
-		BuscadorFiltradorPorCriterios buscadorCriterios = new BuscadorFiltradorPorCriterios();
-		Set<FiltradorPorCriterio> filtradores = buscadorCriterios.buscar(RUTA_JAR_CRITERIO);
-		FiltradorPorCriterio criterio = filtradores.stream().findFirst().get();	
+	public Core inicializar() {
+		List<Mercado> mercados;
+		FiltradorPorCriterio criterio = null;
+
+		try {
+		    mercados = MercadosJsonParser.obtenerMercados(RUTA_JSON_MERCADOS);
+		    BuscadorFiltradorPorCriterios buscadorCriterios = new BuscadorFiltradorPorCriterios();
+			Set<FiltradorPorCriterio> filtradores = buscadorCriterios.buscar(RUTA_JAR_CRITERIO);
+			criterio = filtradores.stream().findFirst().get();		
+		} catch (Exception e) {
+			return new Core();
+		}
 		
 		return new Core(criterio, mercados);
 	}

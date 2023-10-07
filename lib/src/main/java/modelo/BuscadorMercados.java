@@ -4,7 +4,7 @@ import java.util.*;
 
 public class BuscadorMercados {
 
-	public List<Mercado> buscar (List<String> productos, List<Mercado> mercados) throws Exception {
+	public List<Mercado> buscar (List<String> productos, List<Mercado> mercados) {
 		List<Mercado> mercadosConTodosLosProductos = new ArrayList<>();
 		List<Mercado> mercadosConAlMenosUnProducto = new ArrayList<>();
 		

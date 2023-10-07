@@ -13,13 +13,7 @@ public class Recomendador {
     	this.mercados = mercados;
     }
 
-    public Recomendacion recomendar(List<String> productos) throws Exception{  	
-    	if(productos == null)
-            throw new IllegalArgumentException();
-
-    	if(productos.isEmpty())
-    		return new Recomendacion(null);
-    	
+    public Recomendacion recomendar(List<String> productos){  	
     	BuscadorMercados buscadorMercados = new BuscadorMercados();
     	List<Mercado> mercadosConProductos = buscadorMercados.buscar(productos, mercados);    	
     	
