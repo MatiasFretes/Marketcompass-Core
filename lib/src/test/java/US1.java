@@ -62,7 +62,7 @@ public class US1 {
 	}
 	
 	@Test
-	public void CA5_InicialiacionCoreConRutasInexistentes() {
+	public void CA5_InicializacionCoreConRutasInexistentes() {
 		CoreInit.RUTA_JSON_MERCADOS = rutaInexistente;
 		CoreInit.RUTA_JAR_CRITERIO = rutaInexistente;
 		CoreInit coreInitConRutasInexistentes = new CoreInit();
