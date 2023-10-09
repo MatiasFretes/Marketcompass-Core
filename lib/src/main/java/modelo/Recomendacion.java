@@ -1,8 +1,6 @@
 package modelo;
 
-import java.util.Observable;
-
-public class Recomendacion extends Observable{
+public class Recomendacion {
 	
 	private Mercado mercado;
 	
@@ -17,12 +15,6 @@ public class Recomendacion extends Observable{
 	public Mercado getMercado() {
 		return mercado;
 	}
-
-	public void setMercado(Mercado mercado) {
-		this.mercado = mercado;
-		setChanged();
-        notifyObservers(this.mercado);
-	}
 	
 	public boolean isEmpty() {
 		return this.mercado == null || this.mercado.getNombre().isEmpty() || this.mercado.getProductos().isEmpty();
@@ -30,6 +22,6 @@ public class Recomendacion extends Observable{
 
 	@Override
 	public String toString() {
-		return isEmpty() ? "Lo sentimos, el sistema no ha encontrado ninguna recomendación de mercado en este momento." : "Se recomienda el mercado: " + mercado.getNombre();
+		return isEmpty() ? "Lo sentimos, el sistema no ha encontrado ninguna recomendacion de mercado en este momento." : "Se recomienda el mercado: " + mercado.getNombre();
 	}
 }

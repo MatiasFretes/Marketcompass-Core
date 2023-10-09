@@ -1,10 +1,10 @@
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import modelo.BuscadorMercados;
 import modelo.Core;
 import modelo.CoreInit;
@@ -18,6 +18,7 @@ public class US1 {
 	private BuscadorMercados buscadorMercados;
 	private String rutaJsonMercados = "src/test/resources/mercados.json";
 	private String rutaJarCriterio = "src/test/resources/Distancia.jar";
+	private String rutaInexistente = "NoExisteEstaRuta";
 	private List<String> productoInexistente = Arrays.asList("");
 	private List<String> productoExistente = Arrays.asList("P1");
 	private List<String> productoRepetido = Arrays.asList("P3");
@@ -58,5 +59,14 @@ public class US1 {
 		assertTrue(mercadosConProductos.size() >= 2);
 	    Recomendacion recomendacion = core.obtenerRecomendacion(productoRepetido);
 		assertTrue(recomendacion.getMercado().getNombre().equals(mercadoEsperado));
+	}
+	
+	@Test
+	public void CA5_InicialiacionCoreConRutasInexistentes() {
+		CoreInit.RUTA_JSON_MERCADOS = rutaInexistente;
+		CoreInit.RUTA_JAR_CRITERIO = rutaInexistente;
+		CoreInit coreInitConRutasInexistentes = new CoreInit();
+		Core coreConRutasInexistentes = coreInitConRutasInexistentes.inicializar();
+		assertNotNull(coreConRutasInexistentes);
 	}
 }
