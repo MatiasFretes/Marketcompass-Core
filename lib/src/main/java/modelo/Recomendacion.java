@@ -30,6 +30,6 @@ public class Recomendacion extends Observable{
 
 	@Override
 	public String toString() {
-		return "Recomendacion [mercado=" + mercado + "]";
+		return isEmpty() ? "Lo sentimos, el sistema no ha encontrado ninguna recomendación de mercado en este momento." : "Se recomienda el mercado: " + mercado.getNombre();
 	}
 }
