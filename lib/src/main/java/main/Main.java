@@ -10,7 +10,7 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		CoreInit coreInit = new CoreInit();
 		Core core = coreInit.inicializar();
-		Recomendacion recomendacion = core.obtenerRecomendacion(Arrays.asList("P3"));
+		Recomendacion recomendacion = core.obtenerRecomendacion(Arrays.asList("Arroz"));
 		System.out.println(recomendacion);
 	}
 
