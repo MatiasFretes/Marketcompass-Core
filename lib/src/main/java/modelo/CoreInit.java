@@ -5,12 +5,18 @@ import java.util.Set;
 import configuracion.ConfiguracionRutas;
 import extensible.BuscadorFiltradorPorCriterios;
 import extensible.FiltradorPorCriterio;
+import observable.RecomendadorObservable;
 
 public class CoreInit {
 
 	public static String RUTA_JSON_MERCADOS = ConfiguracionRutas.getRutaJsonMercados();
 	public static String RUTA_JAR_CRITERIO = ConfiguracionRutas.getRutaExtensionJAR();
-	
+    private RecomendadorObservable recomendadorObservable;
+    
+    public CoreInit() {
+        recomendadorObservable = new RecomendadorObservable();
+    }
+    
 	public Core inicializar() {
 		List<Mercado> mercados;
 		FiltradorPorCriterio criterio = null;
@@ -26,4 +32,8 @@ public class CoreInit {
 		
 		return new Core(criterio, mercados);
 	}
+	
+    public RecomendadorObservable getRecomendadorObservable() {
+        return recomendadorObservable;
+    }
 }
