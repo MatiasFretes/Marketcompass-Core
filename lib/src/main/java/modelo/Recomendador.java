@@ -8,7 +8,7 @@ public class Recomendador {
 
 	public FiltradorPorCriterio criterio;
 	public List<Mercado> mercados;
-    private RecomendadorObservable recomendadorObservable;
+    public RecomendadorObservable recomendadorObservable;
 
     public Recomendador(FiltradorPorCriterio criterio, List<Mercado> mercados, RecomendadorObservable recomendadorObservable) {
     	this.criterio = criterio;
