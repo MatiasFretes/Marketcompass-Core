@@ -11,15 +11,11 @@ public class CoreInit {
 
 	public static String RUTA_JSON_MERCADOS = ConfiguracionRutas.getRutaJsonMercados();
 	public static String RUTA_JAR_CRITERIO = ConfiguracionRutas.getRutaExtensionJAR();
-    private RecomendadorObservable recomendadorObservable;
-    
-    public CoreInit() {
-        recomendadorObservable = new RecomendadorObservable();
-    }
-    
+       
 	public Core inicializar() {
 		List<Mercado> mercados;
 		FiltradorPorCriterio criterio = null;
+		RecomendadorObservable recomendadorObservable = new RecomendadorObservable();
 
 		try {
 		    mercados = MercadosJsonParser.obtenerMercados(RUTA_JSON_MERCADOS);
@@ -30,10 +26,6 @@ public class CoreInit {
 			return new Core();
 		}
 		
-		return new Core(criterio, mercados);
+		return new Core(criterio, mercados, recomendadorObservable);
 	}
-	
-    public RecomendadorObservable getRecomendadorObservable() {
-        return recomendadorObservable;
-    }
 }

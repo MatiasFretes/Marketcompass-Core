@@ -3,6 +3,7 @@ package modelo;
 import java.util.List;
 
 import extensible.FiltradorPorCriterio;
+import observable.RecomendadorObservable;
 
 public class Core {
 	
@@ -12,8 +13,8 @@ public class Core {
 		
 	}
 	
-	public Core(FiltradorPorCriterio criterio, List<Mercado> mercados) {
-		this.recomendador = new Recomendador(criterio, mercados);
+	public Core(FiltradorPorCriterio criterio, List<Mercado> mercados, RecomendadorObservable recomendadorObservable) {
+		this.recomendador = new Recomendador(criterio, mercados, recomendadorObservable);
 	}
 	
 	public Recomendacion obtenerRecomendacion(List<String> productos) {

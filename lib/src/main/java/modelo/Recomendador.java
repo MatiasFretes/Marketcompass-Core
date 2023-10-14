@@ -10,10 +10,10 @@ public class Recomendador {
 	public List<Mercado> mercados;
     private RecomendadorObservable recomendadorObservable;
 
-    public Recomendador(FiltradorPorCriterio criterio, List<Mercado> mercados) {
+    public Recomendador(FiltradorPorCriterio criterio, List<Mercado> mercados, RecomendadorObservable recomendadorObservable) {
     	this.criterio = criterio;
     	this.mercados = mercados;
-        this.recomendadorObservable = new RecomendadorObservable();
+        this.recomendadorObservable = recomendadorObservable;
     }
 
     public Recomendacion recomendar(List<String> productos){  	
