@@ -14,17 +14,13 @@ public class CoreInit {
 	public Core inicializar() {
 		List<Mercado> mercados;
 		Set<FiltradorPorCriterio> criterios;
-		//FiltradorPorCriterio criterio = null;
-
 		try {
 		    mercados = MercadosJsonParser.obtenerMercados(RUTA_JSON_MERCADOS);
 		    BuscadorFiltradorPorCriterios buscadorCriterios = new BuscadorFiltradorPorCriterios();
-			criterios = buscadorCriterios.buscar(RUTA_JAR_CRITERIO);
-			//criterio = filtradores.stream().findFirst().get();		
+			criterios = buscadorCriterios.buscar(RUTA_JAR_CRITERIO);		
 		} catch (Exception e) {
 			return new Core();
 		}
-		
 		return new Core(criterios, mercados);
 	}
 

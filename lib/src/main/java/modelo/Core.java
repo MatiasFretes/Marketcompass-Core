@@ -17,10 +17,10 @@ public class Core {
 	
 	public Core(Set<FiltradorPorCriterio> criterios, List<Mercado> mercados) {
 		this.criterios = criterios; 
-		this.recomendador = new Recomendador(criterio, mercados);
+		this.recomendador = new Recomendador(mercados);
 	}
 	
-	public Recomendacion obtenerRecomendacion(List<String> productos) {
+	public Recomendacion obtenerRecomendacion(FiltradorPorCriterio criterio,List<String> productos) {
     	if(productos == null)
             throw new IllegalArgumentException();
 
@@ -28,7 +28,7 @@ public class Core {
     		return new Recomendacion(null);
     	
 		try {
-			Recomendacion recomendacion = recomendador.recomendar(productos);
+			Recomendacion recomendacion = recomendador.recomendar(criterio, productos);
 			return recomendacion;
 		} catch (Exception e) {
 			return new Recomendacion(null);

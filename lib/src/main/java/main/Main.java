@@ -1,6 +1,8 @@
 package main;
 
 import java.util.Arrays;
+
+import extensible.FiltradorPorCriterio;
 import modelo.Core;
 import modelo.CoreInit;
 import modelo.Recomendacion;
@@ -10,7 +12,8 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		CoreInit coreInit = new CoreInit();
 		Core core = coreInit.inicializar();
-		Recomendacion recomendacion = core.obtenerRecomendacion(Arrays.asList("Arroz"));
+		FiltradorPorCriterio criterio = core.criterios.stream().findFirst().get();
+		Recomendacion recomendacion = core.obtenerRecomendacion(criterio, Arrays.asList("P1"));
 		System.out.println(recomendacion);
 	}
 
