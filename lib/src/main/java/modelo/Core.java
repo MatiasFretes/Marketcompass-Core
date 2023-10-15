@@ -1,18 +1,22 @@
 package modelo;
 
 import java.util.List;
+import java.util.Set;
 
 import extensible.FiltradorPorCriterio;
 
 public class Core {
 	
 	public Recomendador recomendador;
+	public Set<FiltradorPorCriterio> criterios;
+	public FiltradorPorCriterio criterio;
 
 	public Core() {
 		
 	}
 	
-	public Core(FiltradorPorCriterio criterio, List<Mercado> mercados) {
+	public Core(Set<FiltradorPorCriterio> criterios, List<Mercado> mercados) {
+		this.criterios = criterios; 
 		this.recomendador = new Recomendador(criterio, mercados);
 	}
 	
@@ -29,5 +33,12 @@ public class Core {
 		} catch (Exception e) {
 			return new Recomendacion(null);
 		}
+	}
+	
+	public void seleccionarCriterio(FiltradorPorCriterio criterioSeleccionado) {
+		if (criterioSeleccionado == null) {
+			System.out.println("No se selecciono critero de búsqueda");
+		}
+		this.criterio = criterioSeleccionado;
 	}
 }

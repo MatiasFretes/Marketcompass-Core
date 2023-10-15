@@ -20,7 +20,8 @@ public class Recomendador {
     	if(mercadosConProductos == null || mercadosConProductos.isEmpty()) 
     		return new Recomendacion(null);
     	
-    	Mercado mercadoRecomendado = criterio.filtrar(mercadosConProductos);
+        Mercado mercadoRecomendado = criterio.filtrar(mercadosConProductos);
+    	    
     	return new Recomendacion(mercadoRecomendado);
     }
    
