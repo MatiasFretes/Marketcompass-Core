@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class MercadosJsonParser {
 
-	public static List<Mercado> obtenerMercados(String path) throws Exception{
+	public List<Mercado> obtenerMercados(String path) throws Exception{
 		ObjectMapper mapper = new ObjectMapper(); 
 	    return mapper.readValue(new File(path), new TypeReference<List<Mercado>>() {});
 	}

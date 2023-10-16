@@ -13,13 +13,14 @@ public class CoreInit {
 	public static String RUTA_JAR_CRITERIO = ConfiguracionRutas.getRutaExtensionJAR();
        
 	public Core inicializar() {
+		MercadosJsonParser mercadosJsonParser = new MercadosJsonParser();
+		BuscadorFiltradorPorCriterios buscadorCriterios = new BuscadorFiltradorPorCriterios();
+		RecomendadorObservable recomendadorObservable = new RecomendadorObservable();
 		List<Mercado> mercados;
 		Set<FiltradorPorCriterio> criterios;
-		RecomendadorObservable recomendadorObservable = new RecomendadorObservable();
 
 		try {
-		    mercados = MercadosJsonParser.obtenerMercados(RUTA_JSON_MERCADOS);
-		    BuscadorFiltradorPorCriterios buscadorCriterios = new BuscadorFiltradorPorCriterios();
+		    mercados = mercadosJsonParser.obtenerMercados(RUTA_JSON_MERCADOS);
 			criterios = buscadorCriterios.buscar(RUTA_JAR_CRITERIO);		
 		} catch (Exception e) {
 			return new Core();

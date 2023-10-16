@@ -13,7 +13,7 @@ public class Main {
 		CoreInit coreInit = new CoreInit();
 		Core core = coreInit.inicializar();
 		FiltradorPorCriterio criterio = core.criterios.stream().findFirst().get();
-		Recomendacion recomendacion = core.obtenerRecomendacion(criterio, Arrays.asList("P1"));
+		Recomendacion recomendacion = core.obtenerRecomendacion(criterio, Arrays.asList("Arroz"));
 		System.out.println(recomendacion);
 	}
 
