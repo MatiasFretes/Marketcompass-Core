@@ -1,6 +1,7 @@
 package modelo;
 
 import java.util.List;
+import java.util.Set;
 
 import extensible.FiltradorPorCriterio;
 import observable.RecomendadorObservable;
@@ -8,16 +9,19 @@ import observable.RecomendadorObservable;
 public class Core {
 	
 	public Recomendador recomendador;
+	public Set<FiltradorPorCriterio> criterios;
+	public FiltradorPorCriterio criterio;
 
 	public Core() {
 		
 	}
 	
-	public Core(FiltradorPorCriterio criterio, List<Mercado> mercados, RecomendadorObservable recomendadorObservable) {
-		this.recomendador = new Recomendador(criterio, mercados, recomendadorObservable);
+	public Core(Set<FiltradorPorCriterio> criterios, List<Mercado> mercados, RecomendadorObservable recomendadorObservable) {
+		this.criterios = criterios; 
+		this.recomendador = new Recomendador(mercados, recomendadorObservable);
 	}
 	
-	public Recomendacion obtenerRecomendacion(List<String> productos) {
+	public Recomendacion obtenerRecomendacion(FiltradorPorCriterio criterio,List<String> productos) {
     	if(productos == null)
             throw new IllegalArgumentException();
 
@@ -25,7 +29,7 @@ public class Core {
     		return new Recomendacion(null);
     	
 		try {
-			Recomendacion recomendacion = recomendador.recomendar(productos);
+			Recomendacion recomendacion = recomendador.recomendar(criterio, productos);
 			return recomendacion;
 		} catch (Exception e) {
 			return new Recomendacion(null);

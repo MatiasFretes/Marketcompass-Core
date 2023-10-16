@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import extensible.FiltradorPorCriterio;
 import modelo.BuscadorMercados;
 import modelo.Core;
 import modelo.CoreInit;
@@ -24,6 +26,7 @@ public class US1 {
 	private List<String> productoRepetido = Arrays.asList("P3");
 	private List<String> productoNulo = null;
 	private String mercadoEsperado = "M1";
+	private FiltradorPorCriterio criterio;  
 	
 	@BeforeEach 
 	public void setup() {
@@ -32,24 +35,26 @@ public class US1 {
 		coreInit = new CoreInit();
 		core = coreInit.inicializar();
 		buscadorMercados = new BuscadorMercados();
+		criterio = core.criterios.stream().findFirst().get();
+		
 	}
 	
 	@Test
 	public void CA1_MercadoInexistente() {
-		Recomendacion recomendacion = core.obtenerRecomendacion(productoInexistente);
+		Recomendacion recomendacion = core.obtenerRecomendacion(criterio,productoInexistente);
 		assertTrue(recomendacion.isEmpty());
 	}
 
 	@Test
 	public void CA2_ListaProductosInvalidos() {
 		assertThrows(IllegalArgumentException.class, () -> {
-			core.obtenerRecomendacion(productoNulo);
+			core.obtenerRecomendacion(criterio,productoNulo);
         });
 	}
 
 	@Test
 	public void CA3_MercadoRecomendado() {
-		Recomendacion recomendacion = core.obtenerRecomendacion(productoExistente);
+		Recomendacion recomendacion = core.obtenerRecomendacion(criterio,productoExistente);
 	    assertTrue(recomendacion.getMercado().getNombre().equals(mercadoEsperado));
 	}
 	
@@ -57,7 +62,7 @@ public class US1 {
 	public void CA4_MultiplesMercados() {
 		List<Mercado> mercadosConProductos = buscadorMercados.buscar(productoRepetido, core.recomendador.mercados);
 		assertTrue(mercadosConProductos.size() >= 2);
-	    Recomendacion recomendacion = core.obtenerRecomendacion(productoRepetido);
+	    Recomendacion recomendacion = core.obtenerRecomendacion(criterio,productoRepetido);
 		assertTrue(recomendacion.getMercado().getNombre().equals(mercadoEsperado));
 	}
 	
