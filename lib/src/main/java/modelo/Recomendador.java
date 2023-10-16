@@ -21,7 +21,7 @@ public class Recomendador {
     		return new Recomendacion(null);
   
     	Mercado mercadoRecomendado = criterio.filtrar(mercadosConProductos);
-    	recomendadorObservable.notificarRecomendacion(mercadoRecomendado, productos);
+    	recomendadorObservable.notificarRecomendacion(mercadoRecomendado, productos, criterio);
 
     	return new Recomendacion(mercadoRecomendado);
 	}
