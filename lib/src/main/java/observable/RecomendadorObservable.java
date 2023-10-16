@@ -7,30 +7,18 @@ import extensible.FiltradorPorCriterio;
 import modelo.Mercado;
 
 public class RecomendadorObservable extends Observable {
-    private List<String> productos;
-    private Mercado mercadoRecomendado;
-    private FiltradorPorCriterio criterioUtilizado;
+    public List<String> productos;
+    public String mercadoRecomendado;
+    public String criterioUtilizado;
 
     public RecomendadorObservable() {
     }
 
     public void notificarRecomendacion(Mercado mercadoRecomendado, List<String> productos, FiltradorPorCriterio criterioUtilizado) {
-        this.mercadoRecomendado = mercadoRecomendado;
+        this.mercadoRecomendado = mercadoRecomendado.getNombre();
         this.productos = productos;
-        this.criterioUtilizado = criterioUtilizado;
+        this.criterioUtilizado = criterioUtilizado.getClass().getSimpleName();
         setChanged();
         notifyObservers(this);
     }
-
-    public List<String> getProductos() {
-        return productos;
-    }
-
-    public Mercado getMercadoRecomendado() {
-        return mercadoRecomendado;
-    }
-
-	public FiltradorPorCriterio getCriterioUtilizado() {
-		return criterioUtilizado;
-	}
 }
