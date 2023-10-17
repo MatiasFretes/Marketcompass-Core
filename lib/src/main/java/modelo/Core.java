@@ -7,13 +7,15 @@ import extensible.FiltradorPorCriterio;
 public class Core {
 	
 	public Recomendador recomendador;
-
+	private Sugeridor sugeridor;
+	
 	public Core() {
 		
 	}
 	
 	public Core(FiltradorPorCriterio criterio, List<Mercado> mercados) {
 		this.recomendador = new Recomendador(criterio, mercados);
+		this.sugeridor = new Sugeridor();
 	}
 	
 	public Recomendacion obtenerRecomendacion(List<String> productos) {
@@ -29,5 +31,9 @@ public class Core {
 		} catch (Exception e) {
 			return new Recomendacion(null);
 		}
+	}
+	
+	public List<String> obtenerSugerencias(List<String> productos){
+		return sugeridor.sugerirProductos(productos);
 	}
 }
