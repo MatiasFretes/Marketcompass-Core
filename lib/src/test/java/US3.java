@@ -2,16 +2,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.List;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import modelo.BuscadorMercados;
-import modelo.CoreInit;
-import modelo.Recomendacion;
 import modelo.Sugeridor;
 import service.SugeridorService;
 
@@ -35,12 +30,7 @@ public class US3 {
 	
 	@Test
 	public void CA2_ProductosNoCategorizados() {
-		//SugeridorService sugeridorService2= Mockito.mock(SugeridorService.class);
-		//Sugeridor sugeridor2 = new Sugeridor(sugeridorService2);
 		List<String> input = Arrays.asList("producto1", "producto2");
-        //when(sugeridorService.obtenerSugerencias(input)).thenReturn(listaSugerenciasVacia);
-        //List<String> result = sugeridor.sugerirProductos(input);
-        //assertEquals(listaSugerenciasVacia, result);
         verify(input, listaSugerenciasVacia);
 	}
 	
@@ -52,7 +42,6 @@ public class US3 {
 	}
 
 	private void verify(List<String> input, List<String> output) {
-		
 		when(sugeridorService.obtenerSugerencias(input)).thenReturn(output);
         List<String> result = sugeridor.sugerirProductos(input);
         assertEquals(output, result);
