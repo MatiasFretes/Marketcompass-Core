@@ -17,9 +17,6 @@ public class Main {
 		Recomendacion recomendacion = core.obtenerRecomendacion(criterio, Arrays.asList("Arroz"));
 		System.out.println(recomendacion);
 		
-		Sugeridor sugeridor = new Sugeridor();
-		System.out.println(sugeridor.sugerirProductos(List.of("manzana")));
-
 	}
 
 }
