@@ -21,6 +21,7 @@ class US4 {
     private List<String> productoExistente = Arrays.asList("P3");
     private String mercadoEsperadoCercano = "M1";
     private String mercadoEsperadoLejano = "M2";
+    private FiltradorPorCriterio criterioVacio = null;
     private FiltradorPorCriterio criterioDistanciaCercana;
     private FiltradorPorCriterio criterioDistanciaLejana;
     private Set<FiltradorPorCriterio> criterios;
@@ -36,7 +37,7 @@ class US4 {
 
     @Test
     public void CA1_CriterioNoSeleccionado() {
-        Recomendacion recomendacion = core.obtenerRecomendacion(null, productoExistente);
+        Recomendacion recomendacion = core.obtenerRecomendacion(criterioVacio, productoExistente);
         assertTrue(recomendacion.toString().equals("Lo sentimos, el sistema no ha encontrado ninguna recomendacion de mercado en este momento."));
     }
 
