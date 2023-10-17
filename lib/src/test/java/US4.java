@@ -38,18 +38,17 @@ class US4 {
     @Test
     public void CA1_CriterioNoSeleccionado() {
         Recomendacion recomendacion = core.obtenerRecomendacion(criterioVacio, productoExistente);
-        assertTrue(recomendacion.toString().equals("Lo sentimos, el sistema no ha encontrado ninguna recomendacion de mercado en este momento."));
+        assertTrue(recomendacion.isEmpty());
     }
 
   @Test
    public void CA2_DistanciasMultiples() {	
        List<FiltradorPorCriterio> listaCriterios = new ArrayList<>(criterios);
-       criterioDistanciaCercana = listaCriterios.get(1);
-       criterioDistanciaLejana = listaCriterios.get(0);
+       criterioDistanciaLejana = listaCriterios.get(1);
+       criterioDistanciaCercana = listaCriterios.get(0);
        
        Recomendacion recomendacionCercana = core.obtenerRecomendacion(criterioDistanciaCercana, productoExistente);
        Recomendacion recomendacionLejana = core.obtenerRecomendacion(criterioDistanciaLejana, productoExistente);
-       
        assertTrue(recomendacionCercana.getMercado().getNombre().equals(mercadoEsperadoCercano));
        assertTrue(recomendacionLejana.getMercado().getNombre().equals(mercadoEsperadoLejano));
     }
