@@ -1,21 +1,27 @@
 package modelo;
 
 import java.util.List;
+
+import extensible.FiltradorPorCriterio;
 public class Recomendador {
 
-    BuscadorMercados buscador;
+	public FiltradorPorCriterio criterio;
+	public List<Mercado> mercados;
 
-    public Recomendador() {
-        this.buscador = new BuscadorMercados();
+    public Recomendador(FiltradorPorCriterio criterio, List<Mercado> mercados) {
+    	this.criterio = criterio;
+    	this.mercados = mercados;
     }
 
-    public Mercado recomendar() throws Exception{  	
-    	List<String> productos = PeticionUsuario.getProductos();
+    public Recomendacion recomendar(List<String> productos){  	
+    	BuscadorMercados buscadorMercados = new BuscadorMercados();
+    	List<Mercado> mercadosConProductos = buscadorMercados.buscar(productos, mercados);    	
     	
-    	if(productos == null)
-            throw new IllegalArgumentException();
-
-    	return buscador.buscar(productos);    	
+    	if(mercadosConProductos == null || mercadosConProductos.isEmpty()) 
+    		return new Recomendacion(null);
+    	
+    	Mercado mercadoRecomendado = criterio.filtrar(mercadosConProductos);
+    	return new Recomendacion(mercadoRecomendado);
     }
    
 }

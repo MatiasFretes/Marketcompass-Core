@@ -30,11 +30,15 @@ public class BuscadorFiltradorPorCriterios {
             Class<?> cls = classLoader.loadClass(className);
 
             if(!FiltradorPorCriterio.class.isAssignableFrom(cls))
-               throw new RuntimeException("La clase encontrada no es asignable a un FiltradorPorCriterio");
+               continue;
 
             FiltradorPorCriterio criterioEncontrado = (FiltradorPorCriterio) cls.getDeclaredConstructor().newInstance();
             implementacionesCriterios.add(criterioEncontrado);
         }
+        
+        if(implementacionesCriterios.isEmpty())
+        	throw new RuntimeException();
+        
         classLoader.close();
                 
         return implementacionesCriterios;
