@@ -11,14 +11,16 @@ public class Core {
 	public Recomendador recomendador;
 	public Set<FiltradorPorCriterio> criterios;
 	public FiltradorPorCriterio criterio;
+	private Sugeridor sugeridor;
 
 	public Core() {
 		
 	}
-	
+
 	public Core(Set<FiltradorPorCriterio> criterios, List<Mercado> mercados, RecomendadorObservable recomendadorObservable) {
 		this.criterios = criterios; 
 		this.recomendador = new Recomendador(mercados, recomendadorObservable);
+		this.sugeridor = new Sugeridor();
 	}
 	
 	public Recomendacion obtenerRecomendacion(FiltradorPorCriterio criterio,List<String> productos) {
@@ -34,5 +36,9 @@ public class Core {
 		} catch (Exception e) {
 			return new Recomendacion(null);
 		}
+	}
+	
+	public List<String> obtenerSugerencias(List<String> productos){
+		return sugeridor.sugerirProductos(productos);
 	}
 }
