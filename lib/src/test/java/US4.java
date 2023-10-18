@@ -1,6 +1,5 @@
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -43,15 +42,22 @@ class US4 {
 
   @Test
    public void CA2_DistanciasMultiples() {	
-       List<FiltradorPorCriterio> listaCriterios = new ArrayList<>(criterios);
-       criterioDistanciaLejana = listaCriterios.get(1);
-       criterioDistanciaCercana = listaCriterios.get(0);
+       criterioDistanciaCercana = (FiltradorPorCriterio) criterios.stream()
+    		    .filter(cls -> cls.getClass().getSimpleName().equals("DistanciaCercana"))
+    		    .findFirst()
+    		    .orElse(null);
        
+       criterioDistanciaLejana = (FiltradorPorCriterio) criterios.stream()
+      		    .filter(cls -> cls.getClass().getSimpleName().equals("DistanciaLejana"))
+      		    .findFirst()
+      		    .orElse(null);
+     
        Recomendacion recomendacionCercana = core.obtenerRecomendacion(criterioDistanciaCercana, productoExistente);
        Recomendacion recomendacionLejana = core.obtenerRecomendacion(criterioDistanciaLejana, productoExistente);
        assertTrue(recomendacionCercana.getMercado().getNombre().equals(mercadoEsperadoCercano));
        assertTrue(recomendacionLejana.getMercado().getNombre().equals(mercadoEsperadoLejano));
-    }
 
+  	}
+  
 }
 
