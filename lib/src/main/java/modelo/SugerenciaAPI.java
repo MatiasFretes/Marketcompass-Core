@@ -1,4 +1,4 @@
-package service;
+package modelo;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -13,11 +13,11 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class SugeridorService {
+public class SugerenciaAPI {
 	private final OkHttpClient client = new OkHttpClient();
     private final ObjectMapper mapper = new ObjectMapper();
 
-    public List<String> obtenerSugerencias(List<String> products){
+    public List<String> buscarSugerencias(List<String> products){
         String url = "https://recomendador-de-productos-production.up.railway.app/api/v1/recomendador/productosSugeridos";
         String json;
 		try {

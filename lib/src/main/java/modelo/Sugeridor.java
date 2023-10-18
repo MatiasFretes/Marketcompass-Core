@@ -2,17 +2,15 @@ package modelo;
 
 import java.util.List;
 
-import service.SugeridorService;
-
 public class Sugeridor {
 	
-	private SugeridorService sugeridorService;
+	private SugerenciaAPI sugeridorService;
 	
 	public Sugeridor() {
-		this.sugeridorService = new SugeridorService();
+		this.sugeridorService = new SugerenciaAPI();
 	}
 	
-	public Sugeridor(SugeridorService sugeridorService) {
+	public Sugeridor(SugerenciaAPI sugeridorService) {
 		this.sugeridorService = sugeridorService;
 	}
 	
@@ -21,6 +19,6 @@ public class Sugeridor {
 		if(productos == null || productos.isEmpty())
 			return null;
 		
-		return sugeridorService.obtenerSugerencias(productos);
+		return sugeridorService.buscarSugerencias(productos);
 	}
 }

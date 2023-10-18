@@ -7,19 +7,20 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import modelo.SugerenciaAPI;
 import modelo.Sugeridor;
-import service.SugeridorService;
 
 public class US3 {
 	Sugeridor sugeridor;
-	SugeridorService sugeridorService;
+	SugerenciaAPI sugeridorService;
 	List<String> listaProductosNula = null;
 	List<String> listaSugerenciasVacia = Arrays.asList("");
 
 	
 	@BeforeEach 
 	public void setup() {
-		sugeridorService = Mockito.mock(SugeridorService.class);
+		sugeridorService = Mockito.mock(SugerenciaAPI.class);
 		sugeridor = new Sugeridor(sugeridorService);
 	}
 	
@@ -42,7 +43,7 @@ public class US3 {
 	}
 
 	private void verify(List<String> input, List<String> output) {
-		when(sugeridorService.obtenerSugerencias(input)).thenReturn(output);
+		when(sugeridorService.buscarSugerencias(input)).thenReturn(output);
         List<String> result = sugeridor.sugerirProductos(input);
         assertEquals(output, result);
 	}
