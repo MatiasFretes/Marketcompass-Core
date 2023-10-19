@@ -13,15 +13,17 @@ import modelo.Sugeridor;
 
 public class US3 {
 	Sugeridor sugeridor;
-	SugerenciaAPI sugeridorService;
+	SugerenciaAPI sugerenciaAPI;
 	List<String> listaProductosNula = null;
+	List<String> listaProductosNoCategorizados = Arrays.asList("P1", "P2");
+	List<String> listaProductosCategorizados = Arrays.asList("P3");
 	List<String> listaSugerenciasVacia = Arrays.asList("");
-
-	
+	List<String> listaSugerencias = Arrays.asList("P4", "P5");
+    
 	@BeforeEach 
 	public void setup() {
-		sugeridorService = Mockito.mock(SugerenciaAPI.class);
-		sugeridor = new Sugeridor(sugeridorService);
+		sugerenciaAPI = Mockito.mock(SugerenciaAPI.class);
+		sugeridor = new Sugeridor(sugerenciaAPI);
 	}
 	
 	@Test
@@ -31,19 +33,16 @@ public class US3 {
 	
 	@Test
 	public void CA2_ProductosNoCategorizados() {
-		List<String> input = Arrays.asList("producto1", "producto2");
-        verify(input, listaSugerenciasVacia);
+        verify(listaProductosNoCategorizados, listaSugerenciasVacia);
 	}
 	
 	@Test
 	public void CA3_SugerenciasEncontradas() {
-		List<String> input = Arrays.asList("leche");
-        List<String> output = Arrays.asList("queso", "yogur");
-        verify(input, output);
+		verify(listaProductosCategorizados, listaSugerencias);
 	}
 
 	private void verify(List<String> input, List<String> output) {
-		when(sugeridorService.buscarSugerencias(input)).thenReturn(output);
+		when(sugerenciaAPI.buscarSugerencias(input)).thenReturn(output);
         List<String> result = sugeridor.sugerirProductos(input);
         assertEquals(output, result);
 	}
