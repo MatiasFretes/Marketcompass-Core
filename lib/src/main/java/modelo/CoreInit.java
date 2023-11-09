@@ -15,8 +15,7 @@ public class CoreInit {
 
 		try {
 		    criterios = buscadorCriterios.buscar(RUTA_JAR_CRITERIO);
-		    SeleccionadorPorCriterio primerCriterio = criterios.stream().findFirst().get();
-		    return new Core(primerCriterio);
+		    return new Core(criterios);
 		} catch (Exception e) {
 			return new Core(null);
 		}
