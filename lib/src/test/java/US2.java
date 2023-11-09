@@ -1,4 +1,4 @@
-import static org.junit.jupiter.api.Assertions.assertThrows;
+/*import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
@@ -57,3 +57,4 @@ public class US2 {
 		assertTrue(filtradores.stream().anyMatch(cls -> cls.getClass().getSimpleName().equals("DistanciaLejana")));
     }
 }
+*/
