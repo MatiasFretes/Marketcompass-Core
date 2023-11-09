@@ -1,32 +1,27 @@
 package modelo;
 
-import java.util.List;
 import java.util.Set;
 import configuracion.ConfiguracionRutas;
-import extensible.BuscadorFiltradorPorCriterios;
-import extensible.FiltradorPorCriterio;
-import observable.RecomendadorObservable;
+import extensible.BuscadorCriterio;
+import extensible.SeleccionadorPorCriterio;
 
 public class CoreInit {
 
-	public static String RUTA_JSON_MERCADOS = ConfiguracionRutas.getRutaJsonMercados();
-	public static String RUTA_JAR_CRITERIO = ConfiguracionRutas.getRutaExtensionJAR();
+	private static String RUTA_JAR_CRITERIO = ConfiguracionRutas.getRutaExtensionJAR();
        
 	public Core inicializar() {
-		MercadosJsonParser mercadosJsonParser = new MercadosJsonParser();
-		BuscadorFiltradorPorCriterios buscadorCriterios = new BuscadorFiltradorPorCriterios();
-		RecomendadorObservable recomendadorObservable = new RecomendadorObservable();
-		List<Mercado> mercados;
-		Set<FiltradorPorCriterio> criterios;
+		BuscadorCriterio buscadorCriterios = new BuscadorCriterio();
+		Set<SeleccionadorPorCriterio> criterios;
 
 		try {
-		    mercados = mercadosJsonParser.obtenerMercados(RUTA_JSON_MERCADOS);
-			criterios = buscadorCriterios.buscar(RUTA_JAR_CRITERIO);		
+		    criterios = buscadorCriterios.buscar(RUTA_JAR_CRITERIO);
+		    SeleccionadorPorCriterio primerCriterio = criterios.stream().findFirst().get();
+		    return new Core(primerCriterio);
 		} catch (Exception e) {
-			return new Core();
+			return new Core(null);
 		}
 
-		return new Core(criterios, mercados, recomendadorObservable);
+
 	}
 
 }

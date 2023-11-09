@@ -1,29 +1,20 @@
 package modelo;
 
 import java.util.List;
-import java.util.Set;
+import java.util.Observable;
 
-import extensible.FiltradorPorCriterio;
-import observable.RecomendadorObservable;
+import extensible.SeleccionadorPorCriterio;
 
-public class Core {
+@SuppressWarnings("deprecation")
+public class Core extends Observable{
 	
-	public Recomendador recomendador;
-	public Set<FiltradorPorCriterio> criterios;
-	public FiltradorPorCriterio criterio;
-	private Sugeridor sugeridor;
+	private SeleccionadorPorCriterio criterio;
 
-	public Core() {
-		
-	}
-
-	public Core(Set<FiltradorPorCriterio> criterios, List<Mercado> mercados, RecomendadorObservable recomendadorObservable) {
-		this.criterios = criterios; 
-		this.recomendador = new Recomendador(mercados, recomendadorObservable);
-		this.sugeridor = new Sugeridor();
+	public Core(SeleccionadorPorCriterio criterio) {
+		this.criterio = criterio;
 	}
 	
-	public Recomendacion obtenerRecomendacion(FiltradorPorCriterio criterio,List<String> productos) {
+	public Recomendacion recomendar(List<String> productos) {
     	if(productos == null)
             throw new IllegalArgumentException();
 
@@ -31,14 +22,16 @@ public class Core {
     		return new Recomendacion(null);
     	
 		try {
-			Recomendacion recomendacion = recomendador.recomendar(criterio, productos);
-			return recomendacion;
+			String mercado = criterio.seleccionarMercado(productos);
+			setChanged();
+	        notifyObservers(this);
+			return new Recomendacion(mercado);
+			
 		} catch (Exception e) {
 			return new Recomendacion(null);
 		}
-	}
-	
-	public List<String> obtenerSugerencias(List<String> productos){
-		return sugeridor.sugerirProductos(productos);
+		
 	}
 }
+	
+	

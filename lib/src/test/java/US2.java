@@ -3,12 +3,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import extensible.BuscadorFiltradorPorCriterios;
-import extensible.FiltradorPorCriterio;
+import extensible.BuscadorCriterio;
+import extensible.SeleccionadorPorCriterio;
 
 public class US2 {
 	
-	private BuscadorFiltradorPorCriterios buscadorCriterios;
+	private BuscadorCriterio buscadorCriterios;
 	
 	private String ubicacionInexistente = "";
 	private String ubicacionExistenteSinCriterio = "src/test/resources/DistanciaInvalido.jar";
@@ -18,7 +18,7 @@ public class US2 {
 	
 	@BeforeEach
     public void setUp() {
-    	buscadorCriterios = new BuscadorFiltradorPorCriterios();
+    	buscadorCriterios = new BuscadorCriterio();
     }
 
     @Test
@@ -44,14 +44,14 @@ public class US2 {
     
     @Test
     public void CA4_UbicacionUnicaImplementacion() throws Exception {
-    	Set<FiltradorPorCriterio> filtradores = buscadorCriterios.buscar(ubicacionUnicaImplementacion);
+    	Set<SeleccionadorPorCriterio> filtradores = buscadorCriterios.buscar(ubicacionUnicaImplementacion);
     	assertTrue(filtradores.size() == 1);
     	assertTrue(filtradores.stream().anyMatch(cls -> cls.getClass().getSimpleName().equals("DistanciaCercana")));
     }
     
     @Test
     public void CA5_UbicacionMultiplesImplementaciones() throws Exception{
-		Set<FiltradorPorCriterio> filtradores = buscadorCriterios.buscar(ubicacionMultiplesImplementaciones);
+		Set<SeleccionadorPorCriterio> filtradores = buscadorCriterios.buscar(ubicacionMultiplesImplementaciones);
 		assertTrue(filtradores.size() == 2);
 		assertTrue(filtradores.stream().anyMatch(cls -> cls.getClass().getSimpleName().equals("DistanciaCercana")));
 		assertTrue(filtradores.stream().anyMatch(cls -> cls.getClass().getSimpleName().equals("DistanciaLejana")));

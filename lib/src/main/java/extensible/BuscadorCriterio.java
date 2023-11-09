@@ -9,11 +9,11 @@ import java.util.HashSet;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-public class BuscadorFiltradorPorCriterios {
+public class BuscadorCriterio {
 	
     @SuppressWarnings("resource")
-	public Set<FiltradorPorCriterio> buscar(String ubicacion) throws Exception {
-        Set<FiltradorPorCriterio> implementacionesCriterios = new HashSet<>();
+	public Set<SeleccionadorPorCriterio> buscar(String ubicacion) throws Exception {
+        Set<SeleccionadorPorCriterio> implementacionesCriterios = new HashSet<>();
         File archivo = new File(ubicacion);
         
         if (!archivo.exists() || !archivo.isFile() || !ubicacion.endsWith(".jar")) 
@@ -29,10 +29,10 @@ public class BuscadorFiltradorPorCriterios {
             String className = entry.getName().replace("/", ".").replace(".class", "");
             Class<?> cls = classLoader.loadClass(className);
 
-            if(!FiltradorPorCriterio.class.isAssignableFrom(cls))
+            if(!SeleccionadorPorCriterio.class.isAssignableFrom(cls))
                continue;
 
-            FiltradorPorCriterio criterioEncontrado = (FiltradorPorCriterio) cls.getDeclaredConstructor().newInstance();
+            SeleccionadorPorCriterio criterioEncontrado = (SeleccionadorPorCriterio) cls.getDeclaredConstructor().newInstance();
             implementacionesCriterios.add(criterioEncontrado);
         }
         

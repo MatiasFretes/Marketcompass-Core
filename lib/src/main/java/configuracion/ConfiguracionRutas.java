@@ -18,10 +18,6 @@ public class ConfiguracionRutas {
         }
     }
 
-    public static String getRutaJsonMercados() {
-        return properties.getProperty("rutaJsonMercados");
-    }
-    
     public static String getRutaExtensionJAR() {
         return properties.getProperty("rutaExtensionJAR");
     }
