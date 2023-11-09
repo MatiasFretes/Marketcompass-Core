@@ -33,13 +33,6 @@ dependencies {
     
     // Add Mockito for mocking in tests
     testImplementation 'org.mockito:mockito-core:4.0.0'
-    
-    // Se agrega para la extension de distancia
-    implementation 'org.json:json:20210307'
-    
-    //Consumir API
-    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
-    
 }
 
 test {
