@@ -1,13 +1,12 @@
 package modelo;
 
 import java.util.Set;
-import configuracion.ConfiguracionRutas;
 import extensible.BuscadorCriterio;
 import extensible.SeleccionadorPorCriterio;
 
 public class CoreInit {
 
-	private static String RUTA_JAR_CRITERIO = ConfiguracionRutas.getRutaExtensionJAR();
+	private static String RUTA_JAR_CRITERIO = "C:\\marketcompass\\Criterios.jar";
        
 	public Core inicializar() {
 		BuscadorCriterio buscadorCriterios = new BuscadorCriterio();
