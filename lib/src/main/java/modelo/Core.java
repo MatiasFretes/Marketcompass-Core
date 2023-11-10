@@ -17,20 +17,20 @@ public class Core extends Observable{
 		this.criterioSeleccionado = criterios.stream().findFirst().get();
 	}
 	
-	public Recomendacion recomendar(List<String> productos) {
+	public String recomendar(List<String> productos) {
     	if(productos == null)
             throw new IllegalArgumentException();
 
     	if(productos.isEmpty())
-    		return new Recomendacion(null);
+    		return "";
     	
 		try {
 			String mercado = criterioSeleccionado.seleccionarMercado(productos);
 			setChanged();
 	        notifyObservers(productos);
-			return new Recomendacion(mercado);
+			return mercado;
 		} catch (Exception e) {
-			return new Recomendacion(null);
+			return "";
 		}
 		
 	}

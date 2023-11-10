@@ -1,4 +1,4 @@
-/*import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,10 +11,10 @@ public class US2 {
 	private BuscadorCriterio buscadorCriterios;
 	
 	private String ubicacionInexistente = "";
-	private String ubicacionExistenteSinCriterio = "src/test/resources/DistanciaInvalido.jar";
+	private String ubicacionExistenteSinCriterio = "src/test/resources/CriterioInvalido.jar";
 	private String ubicacionInvalida = "src/test/resources/archivo.txt";
-	private String ubicacionUnicaImplementacion = "src/test/resources/Distancia.jar";
-	private String ubicacionMultiplesImplementaciones = "src/test/resources/DistanciasMultiples.jar"; 
+	private String ubicacionUnicaImplementacion = "src/test/resources/CriterioUnico.jar";
+	private String ubicacionMultiplesImplementaciones = "src/test/resources/Criterios.jar"; 
 	
 	@BeforeEach
     public void setUp() {
@@ -46,15 +46,14 @@ public class US2 {
     public void CA4_UbicacionUnicaImplementacion() throws Exception {
     	Set<SeleccionadorPorCriterio> filtradores = buscadorCriterios.buscar(ubicacionUnicaImplementacion);
     	assertTrue(filtradores.size() == 1);
-    	assertTrue(filtradores.stream().anyMatch(cls -> cls.getClass().getSimpleName().equals("DistanciaCercana")));
+    	assertTrue(filtradores.stream().anyMatch(cls -> cls.getClass().getSimpleName().equals("Distancia")));
     }
     
     @Test
     public void CA5_UbicacionMultiplesImplementaciones() throws Exception{
 		Set<SeleccionadorPorCriterio> filtradores = buscadorCriterios.buscar(ubicacionMultiplesImplementaciones);
 		assertTrue(filtradores.size() == 2);
-		assertTrue(filtradores.stream().anyMatch(cls -> cls.getClass().getSimpleName().equals("DistanciaCercana")));
-		assertTrue(filtradores.stream().anyMatch(cls -> cls.getClass().getSimpleName().equals("DistanciaLejana")));
+		assertTrue(filtradores.stream().anyMatch(cls -> cls.getClass().getSimpleName().equals("Distancia")));
+		assertTrue(filtradores.stream().anyMatch(cls -> cls.getClass().getSimpleName().equals("Precio")));
     }
 }
-*/
