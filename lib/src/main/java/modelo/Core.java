@@ -27,7 +27,7 @@ public class Core extends Observable{
 		try {
 			String mercado = criterioSeleccionado.seleccionarMercado(productos);
 			setChanged();
-	        notifyObservers(this);
+	        notifyObservers(productos);
 			return new Recomendacion(mercado);
 		} catch (Exception e) {
 			return new Recomendacion(null);
