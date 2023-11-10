@@ -26,7 +26,7 @@ public class CriterioParser {
 		return this.criterios.stream()
 		        .filter(c -> c.getClass().getName().equals(criterio))
 		        .findFirst()
-		        .orElseThrow(() -> new NoSuchElementException("No se encontró ningún criterio con el nombre: " + criterio));
+		        .orElseThrow(() -> new NoSuchElementException("No se encontro ningun criterio con el nombre: " + criterio));
 	}
 
 }
