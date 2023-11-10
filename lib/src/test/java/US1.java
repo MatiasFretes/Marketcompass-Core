@@ -11,12 +11,14 @@ public class US1 {
    
 	private CoreInit coreInit;
 	private Core core;
+	private String rutaJarCriterio = "src/test/resources/Criterios.jar";
 	private List<String> productoInexistente = Arrays.asList("");
 	private List<String> productoExistente = Arrays.asList("P1");
 	private List<String> productoRepetido = Arrays.asList("P2");
 	
 	@BeforeEach 
 	public void setup() {
+		CoreInit.RUTA_JAR_CRITERIO = rutaJarCriterio;
 		coreInit = new CoreInit();
 		core = coreInit.inicializar();
 		core.setCriterio("Distancia");

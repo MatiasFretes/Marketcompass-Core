@@ -9,9 +9,11 @@ import modelo.CoreInit;
 class US3 {
     private CoreInit coreInit;
     private Core core;
+    private String rutaJarCriterio = "src/test/resources/Criterios.jar";
 
     @BeforeEach
     public void setup() {
+    	CoreInit.RUTA_JAR_CRITERIO = rutaJarCriterio;
         coreInit = new CoreInit();
         core = coreInit.inicializar();
     }
