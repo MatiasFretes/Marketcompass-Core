@@ -2,6 +2,7 @@ package extensible;
 
 import java.util.Set;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Collections;
@@ -16,7 +17,10 @@ public class BuscadorCriterio {
         Set<SeleccionadorPorCriterio> implementacionesCriterios = new HashSet<>();
         File archivo = new File(ubicacion);
         
-        if (!archivo.exists() || !archivo.isFile() || !ubicacion.endsWith(".jar")) 
+        if(!archivo.exists())
+        	throw new FileNotFoundException("Ubicacion inexistente");
+        
+        if (!ubicacion.endsWith(".jar")) 
             throw new IllegalArgumentException("El archivo no es un archivo JAR valido: " + ubicacion);
        
         URL url = archivo.toURI().toURL();
@@ -35,9 +39,6 @@ public class BuscadorCriterio {
             SeleccionadorPorCriterio criterioEncontrado = (SeleccionadorPorCriterio) cls.getDeclaredConstructor().newInstance();
             implementacionesCriterios.add(criterioEncontrado);
         }
-        
-        if(implementacionesCriterios.isEmpty())
-        	throw new RuntimeException();
         
         classLoader.close();
                 
