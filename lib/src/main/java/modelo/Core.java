@@ -17,6 +17,9 @@ public class Core extends Observable{
 	}
 	
 	public String recomendar(List<String> productos) {   	
+		if(productos == null)
+			throw new IllegalArgumentException("Lista de productos invalida");
+		
 		try {
 			String mercado = criterioSeleccionado.seleccionarMercado(productos);
 			setChanged();
