@@ -34,27 +34,27 @@ public class US2 {
     }
        
     @Test
-    public void CA3_JarVacio() throws Exception{
-    	assertTrue(buscadorCriterios.buscar(directorioDePruebas + "jarVacio.jar").isEmpty());
+    public void CA3_CarpetaVacia() throws Exception{
+    	assertTrue(buscadorCriterios.buscar(directorioDePruebas + "CarpetaVacia").isEmpty());
     }
     
     @Test
     public void CA4_NoEsSeleccionadorPorCriterio() throws Exception{
-    	assertTrue(buscadorCriterios.buscar(directorioDePruebas + "noEsSeleccionadorPorCriterio.jar").isEmpty());
+    	assertTrue(buscadorCriterios.buscar(directorioDePruebas + "NoEsSeleccionador").isEmpty());
     }
     
     @Test
     public void CA5_UbicacionUnicaImplementacion() throws Exception {
-    	Set<SeleccionadorPorCriterio> seleccionadores = buscadorCriterios.buscar(directorioDePruebas + "SeleccionadorPorCriterioUnico.jar");
+    	Set<SeleccionadorPorCriterio> seleccionadores = buscadorCriterios.buscar(directorioDePruebas + "SeleccionadorSimple");
     	assertTrue(seleccionadores.size() == 1);
-    	assertTrue(seleccionadores.stream().anyMatch(cls -> cls.getClass().getSimpleName().equals("Distancia")));
+    	assertTrue(seleccionadores.stream().anyMatch(cls -> cls.getClass().getSimpleName().equals("Disponibilidad")));
     }
     
     @Test
     public void CA6_UbicacionMultiplesImplementaciones() throws Exception{
-		Set<SeleccionadorPorCriterio> seleccionadores = buscadorCriterios.buscar(directorioDePruebas + "SeleccionadorPorCriterioMultiples.jar");
+		Set<SeleccionadorPorCriterio> seleccionadores = buscadorCriterios.buscar(directorioDePruebas + "SeleccionadorMultiple");
 		assertTrue(seleccionadores.size() == 2);
-		assertTrue(seleccionadores.stream().anyMatch(cls -> cls.getClass().getSimpleName().equals("Distancia")));
+		assertTrue(seleccionadores.stream().anyMatch(cls -> cls.getClass().getSimpleName().equals("Disponibilidad")));
 		assertTrue(seleccionadores.stream().anyMatch(cls -> cls.getClass().getSimpleName().equals("Precio")));
     }
 }

@@ -11,37 +11,47 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 public class BuscadorCriterio {
-	
+	    
     @SuppressWarnings("resource")
-	public Set<SeleccionadorPorCriterio> buscar(String ubicacion) throws Exception {
+    public Set<SeleccionadorPorCriterio> buscar(String carpeta) throws Exception {
         Set<SeleccionadorPorCriterio> implementacionesCriterios = new HashSet<>();
-        File archivo = new File(ubicacion);
+        File carpetaFile = new File(carpeta);
+
+        if (!carpetaFile.exists())
+            throw new FileNotFoundException("La carpeta no existe: " + carpeta);
         
-        if(!archivo.exists())
-        	throw new FileNotFoundException("Ubicacion inexistente");
+        if (!carpetaFile.isDirectory()) 
+            throw new IllegalArgumentException("La carpeta no existe: " + carpeta);
         
-        if (!ubicacion.endsWith(".jar")) 
-            throw new IllegalArgumentException("El archivo no es un archivo JAR valido: " + ubicacion);
-       
-        URL url = archivo.toURI().toURL();
-        URLClassLoader classLoader = new URLClassLoader(new URL[]{url});
 
-        JarFile jar = new JarFile(archivo);
-        for (JarEntry entry : Collections.list(jar.entries())) {
-        	if (!entry.getName().endsWith(".class")) continue;
+        File[] archivos = carpetaFile.listFiles((dir, name) -> name.toLowerCase().endsWith(".jar"));
 
-            String className = entry.getName().replace("/", ".").replace(".class", "");
-            Class<?> cls = classLoader.loadClass(className);
-
-            if(!SeleccionadorPorCriterio.class.isAssignableFrom(cls))
-               continue;
-
-            SeleccionadorPorCriterio criterioEncontrado = (SeleccionadorPorCriterio) cls.getDeclaredConstructor().newInstance();
-            implementacionesCriterios.add(criterioEncontrado);
+        if (archivos == null || archivos.length == 0) {
+        	return implementacionesCriterios;
         }
-        
-        classLoader.close();
-                
+
+        for (File archivo : archivos) {
+            URL url = archivo.toURI().toURL();
+            URLClassLoader classLoader = new URLClassLoader(new URL[]{url});
+
+            JarFile jar = new JarFile(archivo);
+            for (JarEntry entry : Collections.list(jar.entries())) {
+                if (!entry.getName().endsWith(".class")) continue;
+
+                String className = entry.getName().replace("/", ".").replace(".class", "");
+                Class<?> cls = classLoader.loadClass(className);
+
+                if (!SeleccionadorPorCriterio.class.isAssignableFrom(cls))
+                    continue;
+
+                SeleccionadorPorCriterio criterioEncontrado = (SeleccionadorPorCriterio) cls.getDeclaredConstructor().newInstance();
+                implementacionesCriterios.add(criterioEncontrado);
+            }
+
+            classLoader.close();
+        }
+
         return implementacionesCriterios;
     }
+
 }

@@ -6,7 +6,7 @@ import extensible.SeleccionadorPorCriterio;
 
 public class CoreInit {
 
-	public static String RUTA_JAR_CRITERIO = "C:\\marketcompass\\Criterios.jar";
+	public static String RUTA_JAR_CRITERIO = "C:\\marketcompass";
        
 	public Core inicializar() {
 		BuscadorCriterio buscadorCriterios = new BuscadorCriterio();

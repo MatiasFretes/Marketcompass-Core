@@ -11,7 +11,7 @@ public class Main {
 		Core core = coreInit.inicializar();
 		System.out.println(core.obtenerNombresCriterios());
 		
-		String recomendacion = core.recomendar(Arrays.asList("manzana"));
+		String recomendacion = core.recomendar(Arrays.asList("P1"));
 		System.out.println(recomendacion);
 	}
 

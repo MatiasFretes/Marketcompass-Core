@@ -9,7 +9,7 @@ import modelo.CoreInit;
 class US3 {
     private CoreInit coreInit;
     private Core core;
-    private String rutaJarCriterio = "src/test/resources/Criterios.jar";
+	private String rutaJarCriterio = "src/test/resources/SeleccionadorSimple";
 
     @BeforeEach
     public void setup() {
@@ -34,7 +34,7 @@ class US3 {
 
 	@Test
 	public void CA3_CriterioSeleccionado(){	
-		core.setCriterio("Distancia");
-		assertEquals("Distancia", core.criterioSeleccionado.getClass().getName());
+		core.setCriterio("Disponibilidad");
+		assertEquals("Disponibilidad", core.criterioSeleccionado.getClass().getName());
 	} 
 }
