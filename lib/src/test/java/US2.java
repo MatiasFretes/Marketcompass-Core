@@ -2,6 +2,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,7 @@ public class US2 {
 	
 	@BeforeEach
     public void setUp() {
-    	buscadorCriterios = new BuscadorCriterio();
+    	buscadorCriterios = new BuscadorCriterio(Arrays.asList(""));
     }
 
     @Test

@@ -7,10 +7,17 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 public class BuscadorCriterio {
+	
+	public List<String> mercados;
+	
+	public BuscadorCriterio(List<String> mercados) {
+		this.mercados = mercados;
+	}
 	    
     @SuppressWarnings("resource")
     public Set<SeleccionadorPorCriterio> buscar(String carpeta) throws Exception {
@@ -44,7 +51,7 @@ public class BuscadorCriterio {
                 if (!SeleccionadorPorCriterio.class.isAssignableFrom(cls))
                     continue;
 
-                SeleccionadorPorCriterio criterioEncontrado = (SeleccionadorPorCriterio) cls.getDeclaredConstructor().newInstance();
+                SeleccionadorPorCriterio criterioEncontrado = (SeleccionadorPorCriterio) cls.getDeclaredConstructor(List.class).newInstance(this.mercados);
                 implementacionesCriterios.add(criterioEncontrado);
             }
 

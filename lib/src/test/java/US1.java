@@ -1,6 +1,8 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.List;
@@ -8,12 +10,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import modelo.Core;
 import modelo.CoreInit;
+import modelo.ProveedorMercados;
 
 public class US1 {
    
 	private CoreInit coreInit;
 	private Core core;
-	private String rutaJarCriterio = "src/test/resources/SeleccionadorSimple";
+	private String directorioDePrueba = "src/test/resources/SeleccionadorSimple";
 	private List<String> productoVacio = Arrays.asList("");
 	private List<String> productoInexistente = Arrays.asList("P3");
 	private List<String> productoExistente = Arrays.asList("P1");
@@ -22,8 +25,11 @@ public class US1 {
 	
 	@BeforeEach 
 	public void setup() {
-		CoreInit.RUTA_JAR_CRITERIO = rutaJarCriterio;
+	    ProveedorMercados proveedorMercadosMock = mock(ProveedorMercados.class);
+	    when(proveedorMercadosMock.obtenerMercados()).thenReturn(Arrays.asList("A", "B"));
 		coreInit = new CoreInit();
+		coreInit.setDirectorio(directorioDePrueba);
+		coreInit.setProveedorMercados(proveedorMercadosMock);
 		core = coreInit.inicializar();
 	}
 	
