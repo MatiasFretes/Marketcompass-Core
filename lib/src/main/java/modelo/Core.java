@@ -20,8 +20,19 @@ public class Core extends Observable{
 		if(productos == null)
 			throw new IllegalArgumentException("Lista de productos invalida");
 		
+		if(esVacia(productos)) {
+			RecomendacionVacia recomendacionVacia = new RecomendacionVacia();
+			return recomendacionVacia.obtenerMensaje();
+		}
+			
 		try {
 			String mercado = criterioSeleccionado.seleccionarMercado(productos);
+			
+			if(mercado == null || mercado.isEmpty()) {
+				RecomendacionVacia recomendacionVacia = new RecomendacionVacia();
+				return recomendacionVacia.obtenerMensaje();
+			}
+				
 			setChanged();
 	        notifyObservers(productos);
 			return mercado;
@@ -37,4 +48,8 @@ public class Core extends Observable{
 	public void setCriterio(String nombreCriterio) {
 		this.criterioSeleccionado = criterioParser.obtenerSeleccionadorCriterioPorNombre(nombreCriterio);
 	}
+	
+	private boolean esVacia(List<String> lista) {
+        return lista.isEmpty() || lista.stream().allMatch(String::isEmpty);
+    }
 }

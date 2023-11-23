@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import modelo.Core;
 import modelo.CoreInit;
 import modelo.ProveedorMercados;
+import modelo.RecomendacionVacia;
 
 public class US1 {
    
@@ -22,6 +23,7 @@ public class US1 {
 	private List<String> productoExistente = Arrays.asList("P1");
 	private List<String> productoRepetido = Arrays.asList("P2");
 	private List<String> multiplesProductos = Arrays.asList("P1", "P2", "P3");	
+	private RecomendacionVacia recomendacionVacia = new RecomendacionVacia();
 	
 	@BeforeEach 
 	public void setup() {
@@ -36,7 +38,7 @@ public class US1 {
 	@Test
 	public void CA1_ProductoInexistente() {
 		String recomendacion = core.recomendar(productoInexistente);
-		assertTrue(recomendacion.isEmpty());
+		assertEquals(recomendacionVacia.obtenerMensaje(), recomendacion);
 	}
 	
 	@Test
@@ -61,7 +63,7 @@ public class US1 {
 	@Test
 	public void CA5_ProductoVacio() {
 		String recomendacion = core.recomendar(productoVacio);
-		assertTrue(recomendacion.isEmpty());
+		assertEquals(recomendacionVacia.obtenerMensaje(), recomendacion);
 	}
 	
 	@Test

@@ -2,12 +2,14 @@ package modelo;
 
 import java.util.List;
 import java.util.Set;
+
+import configuracion.ConfiguracionRuta;
 import extensible.BuscadorCriterio;
 import extensible.SeleccionadorPorCriterio;
 
 public class CoreInit {
 
-	public String directorio = "C:\\marketcompass";
+	public String directorio = ConfiguracionRuta.obtenerDirectorio();
 	public ProveedorMercados proveedorMercados;
 	
 	public CoreInit() {
@@ -17,9 +19,12 @@ public class CoreInit {
 	public Core inicializar() {
 		try {	 
 			List<String> mercados = proveedorMercados.obtenerMercados();
+
 			BuscadorCriterio buscadorCriterios = new BuscadorCriterio(mercados);
+
 			Set<SeleccionadorPorCriterio> criterios = buscadorCriterios.buscar(directorio);
-		    return new Core(criterios);
+
+			return new Core(criterios);
 		} catch (Exception e) {
 			return new Core(null);
 		}
