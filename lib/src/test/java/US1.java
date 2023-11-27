@@ -1,6 +1,5 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -11,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import modelo.Core;
 import modelo.CoreInit;
 import modelo.ProveedorMercados;
-import modelo.RecomendacionVacia;
 
 public class US1 {
    
@@ -23,7 +21,6 @@ public class US1 {
 	private List<String> productoExistente = Arrays.asList("P1");
 	private List<String> productoRepetido = Arrays.asList("P2");
 	private List<String> multiplesProductos = Arrays.asList("P1", "P2", "P3");	
-	private RecomendacionVacia recomendacionVacia = new RecomendacionVacia();
 	
 	@BeforeEach 
 	public void setup() {
@@ -38,7 +35,7 @@ public class US1 {
 	@Test
 	public void CA1_ProductoInexistente() {
 		String recomendacion = core.recomendar(productoInexistente);
-		assertEquals(recomendacionVacia.obtenerMensaje(), recomendacion);
+		assertEquals("Recomendacion inexistente", recomendacion);
 	}
 	
 	@Test
@@ -61,14 +58,14 @@ public class US1 {
 	}
 	
 	@Test
-	public void CA5_ProductoVacio() {
-		String recomendacion = core.recomendar(productoVacio);
-		assertEquals(recomendacionVacia.obtenerMensaje(), recomendacion);
+	public void CA5_MultiplesProductos() {
+		String recomendacion = core.recomendar(multiplesProductos);
+		assertEquals("B", recomendacion);
 	}
 	
 	@Test
-	public void CA6_MultiplesProductos() {
-		String recomendacion = core.recomendar(multiplesProductos);
-		assertEquals("B", recomendacion);
+	public void CA6_ListaVaciaRecomendacionInexistente() {
+		String recomendacion = core.recomendar(productoVacio);
+		assertEquals("Recomendacion inexistente", recomendacion);
 	}
 }
