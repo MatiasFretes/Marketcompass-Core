@@ -33,7 +33,7 @@ public class US1 {
 	}
 	
 	@Test
-	public void CA1_ProductoInexistente() {
+	public void CA1_ProductoYRecomendacionInexistentes() {
 		String recomendacion = core.recomendar(productoInexistente);
 		assertEquals("Recomendacion inexistente", recomendacion);
 	}
